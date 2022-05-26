@@ -1,0 +1,350 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Gestión Activos</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("BandejaActivos","Activo")">Bandeja Activos</a></li>
+            <li class="breadcrumb-item active">Detalle Activo</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- Sección Datos Basicos Elemento -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="m-b-0 text-white">Detalle Activo</h4>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <h3 class="box-title">Activo</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Clase:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> Computador </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Marca:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> HP </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Serial:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> XUFASD456 </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Fecha Adquisición:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> 11/06/1987 </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Responsable:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> Fabio Cañon Solis </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Valor Adquisición:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> 25'000.000 </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Estado:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> En Buenas Condiciones </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn btn-info"> <i class="fa fa-pencil"></i> Editar</button>
+                                        <button type="button" class="btn btn-inverse">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sección Historico -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <h4 class="card-title text-white m-b-40">Historico</h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista"))
+                        {
+                            <button type="button" class="btn btn-success" onclick="AbrirModal()"> Crear Ticket</button>
+                        }
+                        else if (User.IsInRole("Diagnosticador"))
+                        {
+                            <button type="button" class="btn btn-success" onclick="AbrirModal()"> Diagnosticar</button>
+                        }
+                        else if (User.IsInRole("Evaluaciones"))
+                        {
+                            <button type="button" class="btn btn-success" onclick="AbrirModal()"> Evaluar elemento</button>
+                        }
+                        else if (User.IsInRole("Reparaciones"))
+                        {
+                            <button type="button" class="btn btn-success" onclick="AbrirModal()"> Reportar reparación</button>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Ticket</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" id="diagnostico-tab" data-toggle="tab" href="#diagnostico" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Diagnostico</span></a></li>
+                    <li class="nav-item"> <a class="nav-link" id="evaluacion-tab" data-toggle="tab" href="#evaluacion" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Evaluación</span></a></li>
+                    <li class="nav-item"> <a class="nav-link" id="reparacion-tab" data-toggle="tab" href="#reparacion" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Reparación</span></a></li>
+                </ul>
+                <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                    <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Diagnostico</th>
+                                    <th>Fecha del diagnostico</th>
+                                    <th>Evaluación</th>
+                                    <th>Fecha del evaluación</th>
+                                    <th>Reparación</th>
+                                    <th>Fecha del reparación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Diagnostico</td>
+                                    <td>Se ve como dañado</td>
+                                    <td>30/04/2022</td>
+                                    <td>No tiene</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="diagnostico" role="tabpanel" aria-labelledby="diagnostico-tab">
+                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Fecha del diagnostico</th>
+                                    <th>Apto</th>
+                                    <th>Reparación</th>
+                                    <th>Tecnico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Se ve como dañado</td>
+                                    <td>30/04/2022</td>
+                                    <td>No</td>
+                                    <td>Si</td>
+                                    <td>Aldedier</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="evaluacion" role="tabpanel" aria-labelledby="evaluacion-tab">
+                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Fecha del evaluación</th>
+                                    <th>Decisión</th>
+                                    <th>Tecnico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Se puede arreglar</td>
+                                    <td>30/04/2022</td>
+                                    <td>Si</td>
+                                    <td>Aldedier</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="reparacion" role="tabpanel" aria-labelledby="reparacion-tab">
+                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Fecha del reparación</th>
+                                    <th>Tecnico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ya lo arregle</td>
+                                    <td>30/04/2022</td>
+                                    <td>Fabio</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal de creación -->
+<div class="modal fade" id="myModal1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-colored-header bg-success">
+                @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista"))
+                {
+                    <h2 class="modal-title text-white" id="myLargeModalLabel">Crear Ticket</h2>
+                }
+                else if (User.IsInRole("Diagnosticador"))
+                {
+                    <h2 class="modal-title text-white" id="myLargeModalLabel">Diagnosticar</h2>
+                }
+                else if (User.IsInRole("Evaluaciones"))
+                {
+                    <h2 class="modal-title text-white" id="myLargeModalLabel">Evaluar elemento</h2>
+                }
+                else if (User.IsInRole("Reparaciones"))
+                {
+                    <h2 class="modal-title text-white" id="myLargeModalLabel">Reportar reparación</h2>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista"))
+                {
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="modal-title" id="myLargeModalLabel">¿Desea crear un ticket a este elemento?</h2>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción del documento (Max 1000 caracteres)", @maxlength = "1000", id = "DESCRIPCION" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "FECHA" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer text-center" style="justify-content:center">
+                @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista"))
+                {
+                    <button type="button" class="btn btn-success waves-effect" onclick="CrearTicket()">
+                        <span class="fas fa-save"></span> Crear
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-success waves-effect" onclick="GuardarUsuario()">
+                        <span class="fas fa-save"></span> Guardar
+                    </button>
+                }
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div id="notificacion" style="margin:20px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
+<script>
+    function AbrirModal() {
+        $("#myModal1").modal("show");
+    }
+</script>
+

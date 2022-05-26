@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Web.Models.Aplicacion.ActivoDTO>
+@using Web.Validacion.General
+@using Web.Models.Aplicacion
+
+@{
+    GestionClaims gestionClaims = new GestionClaims(User);
+}
+
+<link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Gestión Activos</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Activo</a></li>
+            <li class="breadcrumb-item active">Bandeja Activos</li>
+        </ol>
+    </div>
+</div>
+
+<h1>@gestionClaims.Nombres -@gestionClaims.Apellidos - @gestionClaims.Cargo</h1>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h4 class="card-title">Datos Bandeja Activos</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Ticket</th>
+                                <th>Detalle</th>
+                                <th>Clase</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Serial</th>
+                                <th>Fecha ingreso</th>
+                                <th>Fecha final garantía</th>
+                                <th>Valor</th>
+                                <th>Fecha baja</th>
+                                <th>Estado</th>
+                                <th>Observación</th>
+                                <th>Dependencia</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista"))
+                                        {
+                                            <button type="button" class="btn btn-success">Crear</button>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Sin acceso</span>
+                                        }
+                                    </td>
+                                    <td><a type="button" class="btn btn-success" href="@Url.Action("DetalleGestionActivo","Activo", new { _id = item.ACTIVO_ID })"><i class="fas fa-eye"></i> Ver</a></td>
+                                    <td>@item.CLASE_ID</td>
+                                    <td>@item.MARCA_ID</td>
+                                    <td>@item.MODELO_ID</td>
+                                    <td>@item.SERIAL</td>
+                                    <td>@item.FECHA_INGRESO</td>
+                                    <td>@item.FECHA_FINAL_GARANTIA</td>
+                                    <td>@item.VALOR</td>
+                                    <td>@item.FECHA_BAJA</td>
+                                    <td><span class="badge badge-success">@item.ESTADO</span></td>
+                                    <td>@item.OBSERVACION</td>
+                                    <td>@item.DEPENDENCIA_ID</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Datos Bandeja Activos</h4>
+                <h6 class="card-subtitle">Exportar datos a Copy, CSV, Excel, PDF & Print</h6>
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+
+                                <th>Creado</th>
+                                <th>Especies</th>
+                                <th>Genero</th>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
+                                <th>Url</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Result item in ViewBag.RESULTADO_RICKMORTY)
+                            {
+                                <tr>
+                                    <td>@item.created</td>
+                                    <td>@item.species</td>
+                                    <td>@item.gender</td>
+                                    <td>@item.name</td>
+                                    <td><img src="@item.image" width="60px" height="60px" /></td>
+                                    <td><a href="@item.url" target="_blank">Ir</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

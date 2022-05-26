@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Web.Models.Aplicacion.ModeloDTO>
+@using Web.Validacion.General
+
+@{
+    GestionClaims gestionClaims = new GestionClaims(User);
+    string nombreVista = "modelo";
+}
+
+<link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Plantilla/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Gestión @nombreVista</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">@nombreVista</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <h4 class="card-title text-white m-b-40">Lista @nombreVista</h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="button" class="btn btn-success" onclick="AbrirModal()"> Crear @nombreVista</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Marca Id</th>
+                                <th>Nombre</th>
+                                <th>Vida útil</th>
+                                <th>Vigente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.MODELO_ID</td>
+                                    <td>@item.MARCA_ID</td>
+                                    <td>@item.NOMBRE</td>
+                                    <td>@item.VIDA_UTIL</td>
+                                    <td>@item.VIGENTE</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de creación -->
+<div class="modal fade" id="myModal1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-colored-header bg-success">
+                <h2 class="modal-title text-white" id="myLargeModalLabel">Crear @nombreVista</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.Label("", "Marca", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("MARCA", null, String.Format("Seleccione una marca"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "MARCA" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.Label("", "Vida útil", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.Editor("VIDA_UTIL", new { htmlAttributes = new { @class = "form-control", type = "number", @Required = true, @id = "VIDA_UTIL", @placeholder = "Digite la vida útil del elemento" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.Label("", "Nombre", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.Editor("NOMBRE", new { htmlAttributes = new { @class = "form-control", type = "text", @Required = true, @id = "NOMBRE", @placeholder = "Digite el nombre" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center" style="justify-content:center">
+                <button type="button" class="btn btn-success waves-effect" onclick="GuardarModelo()">
+                    <span class="fas fa-save"></span> Guardar
+                </button>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div id="notificacion" style="margin:20px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
+<script src="~/Plantilla/assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script>
+    function AbrirModal() {
+        $("#myModal1").modal("show");
+    }
+
+    function GuardarModelo()
+    {
+        var modeloDTO =
+        {
+            MARCA_ID: $("#MARCA").val(),
+            VIDA_UTIL: $("#VIDA_UTIL").val(),
+            NOMBRE: $("#NOMBRE").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("CrearModelo", "Dominio")',
+            data: modeloDTO,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+              Swal.fire({
+                    title: 'Exito',
+                    text: data.mensaje,
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    location.reload();
+                });
+            },
+            error: function(xhr, status) {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    }
+
+</script>
