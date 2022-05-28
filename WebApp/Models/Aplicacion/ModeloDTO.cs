@@ -8,10 +8,10 @@ namespace Web.Models.Aplicacion
 {
     public class ModeloDTO
     {
-        public int MODELO_ID { get; set; }
-        public int MARCA_ID { get; set; }
-        public string NOMBRE { get; set; }
-        public int VIDA_UTIL { get; set; }
-        public bool VIGENTE { get; set; }
+        public int modeloId { get; set; }
+        public int marcaId { get; set; }
+        public string nombre { get; set; }
+        public string vidaUtil { get; set; }
+        public string vigente { get; set; } = "SI";
     }
 }

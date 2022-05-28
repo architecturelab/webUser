@@ -145,8 +145,7 @@
         $("#myModal1").modal("show");
     }
 
-    function GuardarEmpleado()
-    {
+    function GuardarEmpleado() {
         var empleadoDTO =
         {
             NOMBRE: $("#NOMBRE").val(),
@@ -162,17 +161,30 @@
             type: 'POST',
             dataType: 'json',
             success: function(data) {
-              Swal.fire({
-                    title: 'Exito',
-                    text: data.mensaje,
-                    icon: 'success',
-                    showCancelButton: false,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
-                }).then((result) => {
-                    location.reload();
-                });
+                if (data.ok) {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: data.mensaje,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: data.mensaje,
+                        icon: 'warning',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error: function(xhr, status) {
                 Swal.fire({

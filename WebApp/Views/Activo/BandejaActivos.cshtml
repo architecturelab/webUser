@@ -60,18 +60,18 @@
                                             <span class="badge badge-danger">Sin acceso</span>
                                         }
                                     </td>
-                                    <td><a type="button" class="btn btn-success" href="@Url.Action("DetalleGestionActivo","Activo", new { _id = item.ACTIVO_ID })"><i class="fas fa-eye"></i> Ver</a></td>
-                                    <td>@item.CLASE_ID</td>
-                                    <td>@item.MARCA_ID</td>
-                                    <td>@item.MODELO_ID</td>
-                                    <td>@item.SERIAL</td>
-                                    <td>@item.FECHA_INGRESO</td>
-                                    <td>@item.FECHA_FINAL_GARANTIA</td>
-                                    <td>@item.VALOR</td>
-                                    <td>@item.FECHA_BAJA</td>
-                                    <td><span class="badge badge-success">@item.ESTADO</span></td>
-                                    <td>@item.OBSERVACION</td>
-                                    <td>@item.DEPENDENCIA_ID</td>
+                                    <td><a type="button" class="btn btn-success" href="@Url.Action("DetalleGestionActivo","Activo", new { _id = item.itemId })"><i class="fas fa-eye"></i> Ver</a></td>
+                                    <td>@item.claseId</td>
+                                    <td>@item.marcaId</td>
+                                    <td>@item.modeloId</td>
+                                    <td>@item.serial</td>
+                                    <td>@item.fechaIngreso</td>
+                                    <td>@item.fechaFinalGarantia</td>
+                                    <td>@item.valor</td>
+                                    <td>@item.fechaBaja</td>
+                             @*       <td><span class="badge badge-success">@item.estado</span></td>
+                                    <td>@item.observacion</td>*@
+                                    <td>@item.dependenciaId</td>
                                 </tr>
                             }
                         </tbody>
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<div class="row">
+@*<div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -119,6 +119,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 

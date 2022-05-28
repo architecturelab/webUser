@@ -16,7 +16,7 @@
         [Authorize(Roles = "Administrador,Diagnosticador,Evaluaciones,Reparaciones")]
         public async Task<IActionResult> BandejaActivos()
         {
-            ViewBag.RESULTADO_RICKMORTY = (new RickyMortyValidacion().Consultar()).results;
+            //ViewBag.RESULTADO_RICKMORTY = (new RickyMortyValidacion().Consultar()).results;
             return View(await new ActivoValidacion().ConsultarActivos());
         }
 
@@ -25,10 +25,10 @@
 
         public async Task<IActionResult> GestionActivos()
         {
-            ViewBag.CLASE = new SelectList(await new DominioValidacion().ConsultarClases(), "CLASE_ID", "NOMBRE");
-            ViewBag.MARCA = new SelectList(await new DominioValidacion().ConsultarMarcas(), "MARCA_ID", "NOMBRE");
-            ViewBag.MODELO = new SelectList(await new DominioValidacion().ConsultarModelos(), "MODELO_ID", "NOMBRE");
-            ViewBag.DEPENDENCIA = new SelectList(await new DominioValidacion().ConsultarDependencias(), "DEPENDENCIA_ID", "NOMBRE");
+            ViewBag.CLASE = new SelectList(await new DominioValidacion().ConsultarClases(), "claseId", "nombre");
+            ViewBag.MARCA = new SelectList(await new DominioValidacion().ConsultarMarcas(), "marcaId", "nombre");
+            ViewBag.MODELO = new SelectList(await new DominioValidacion().ConsultarModelos(), "modeloId", "nombre");
+            ViewBag.DEPENDENCIA = new SelectList(await new DominioValidacion().ConsultarDependencias(), "dependenciaId", "nombre");
 
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "Disponible", Value = "Disponible" });
@@ -44,8 +44,8 @@
         [HttpPost]
         public async Task<JsonResult> CrearActivo(ActivoDTO activoDTO)
         {
-            string resultado = await new ActivoValidacion().ValidacionActivoAsync(activoDTO);
-            return Json(new { mensaje = resultado });
+            (bool, string) resultado = await new ActivoValidacion().ValidacionActivoAsync(activoDTO);
+            return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
 

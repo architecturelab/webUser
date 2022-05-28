@@ -19,8 +19,8 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<JsonResult> CrearEmpleado(EmpleadoDTO empleadoDTO)
         {
-            string resultado = await new DominioValidacion().ValidacionEmpleadoAsync(empleadoDTO);
-            return Json(new { mensaje = resultado });
+            (bool, string) resultado = await new DominioValidacion().ValidacionEmpleadoAsync(empleadoDTO);
+            return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         public async Task<IActionResult> Dependencias()
@@ -31,8 +31,8 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<JsonResult> CrearDependencia(DependenciaDTO dependenciaDTO)
         {
-            string resultado = await new DominioValidacion().ValidacionDependenciaAsync(dependenciaDTO);
-            return Json(new { mensaje = resultado });
+            (bool, string) resultado = await new DominioValidacion().ValidacionDependenciaAsync(dependenciaDTO);
+            return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         public async Task<IActionResult> Clases()
@@ -43,27 +43,25 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<JsonResult> CrearClase(ClaseDTO claseDTO)
         {
-            string resultado = await new DominioValidacion().ValidacionClaseAsync(claseDTO);
-            return Json(new { mensaje = resultado });
+            (bool, string) resultado = await new DominioValidacion().ValidacionClaseAsync(claseDTO);
+            return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         public async Task<IActionResult> Marcas()
         {
-            ViewBag.CLASE = new SelectList(await new DominioValidacion().ConsultarClases(), "CLASE_ID", "NOMBRE");
-
             return View(await new DominioValidacion().ConsultarMarcas());
         }
 
         [HttpPost]
         public async Task<JsonResult> CrearMarca(MarcaDTO marcaDTO)
         {
-            string resultado = await new DominioValidacion().ValidacionMarcaAsync(marcaDTO);
-            return Json(new { mensaje = resultado });
+            (bool, string) resultado = await new DominioValidacion().ValidacionMarcaAsync(marcaDTO);
+            return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         public async Task<IActionResult> Modelos()
         {
-            ViewBag.MARCA = new SelectList(await new DominioValidacion().ConsultarMarcas(), "MARCA_ID", "NOMBRE");
+            ViewBag.MARCA = new SelectList(await new DominioValidacion().ConsultarMarcas(), "marcaId", "nombre");
 
             return View(await new DominioValidacion().ConsultarModelos());
         }
@@ -71,8 +69,8 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<JsonResult> CrearModelo(ModeloDTO modeloDTO)
         {
-            string resultado = await new DominioValidacion().ValidacionModeloAsync(modeloDTO);
-            return Json(new { mensaje = resultado });
+            (bool, string) resultado = await new DominioValidacion().ValidacionModeloAsync(modeloDTO);
+            return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Web.Models.Aplicacion.ActivoDTO
 
 <link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
 
@@ -38,7 +34,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Clase:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> Computador </p>
+                                        <p class="form-control-static"> @Model.claseId </p>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +43,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Marca:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> HP </p>
+                                        <p class="form-control-static"> @Model.marcaId </p>
                                     </div>
                                 </div>
                             </div>
@@ -59,16 +55,16 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Serial:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> XUFASD456 </p>
+                                        <p class="form-control-static"> @Model.serial </p>
                                     </div>
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Fecha Adquisición:</label>
+                                    <label class="control-label text-right col-md-3">Fecha Ingreso:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> 11/06/1987 </p>
+                                        <p class="form-control-static"> @Model.fechaIngreso </p>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +85,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Valor Adquisición:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> 25'000.000 </p>
+                                        <p class="form-control-static"> @Model.valor </p>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +93,7 @@
                         </div>
                         <!--/row-->
                         <!--/row-->
-                        <div class="row">
+               @*         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Estado:</label>
@@ -107,7 +103,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>*@
 
                     </div>
                     <div class="form-actions">

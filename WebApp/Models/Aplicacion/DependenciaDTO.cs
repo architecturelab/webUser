@@ -8,8 +8,8 @@ namespace Web.Models.Aplicacion
 {
     public class DependenciaDTO
     {
-        public int DEPENDENCIA_ID { get; set; }
-        public string NOMBRE { get; set; }
-        public bool VIGENTE { get; set; }
+        public int dependenciaId { get; set; }
+        public string nombre { get; set; }
+        public string vigente { get; set; } = "SI";
     }
 }

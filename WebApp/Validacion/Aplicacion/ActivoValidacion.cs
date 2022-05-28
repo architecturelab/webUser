@@ -10,45 +10,45 @@ namespace Web.Validacion.Aplicacion
 {
     public class ActivoValidacion
     {
-        public async Task<string> ValidacionActivoAsync(ActivoDTO activoDTO)
+        public async Task<(bool, string)> ValidacionActivoAsync(ActivoDTO activoDTO)
         {
-            if (activoDTO.CLASE_ID == 0)
-                return "El campo clase es obligatorio";
+            if (activoDTO.claseId == 0)
+                return (false, "El campo clase es obligatorio");
 
-            if (activoDTO.MARCA_ID == 0)
-                return "El campo marca es obligatorio";
+            if (activoDTO.marcaId == 0)
+                return (false, "El campo marca es obligatorio");
 
-            if (activoDTO.MODELO_ID == 0)
-                return "El campo modelo es obligatorio";
+            if (activoDTO.modeloId == 0)
+                return (false, "El campo modelo es obligatorio");
 
-            if (string.IsNullOrEmpty(activoDTO.SERIAL))
-                return "El campo serial es obligatorio";
+            if (string.IsNullOrEmpty(activoDTO.serial))
+                return (false, "El campo serial es obligatorio");
 
-            if (activoDTO.FECHA_INGRESO.Year < 2000)
-                return "El campo fecha ingreso es obligatorio";
+            if (activoDTO.fechaIngreso == null)
+                return (false, "El campo fecha ingreso es obligatorio");
 
-            if (activoDTO.FECHA_FINAL_GARANTIA.Year < 2000)
-                return "El campo fecha final garantia es obligatorio";
+            if (activoDTO.fechaFinalGarantia == null)
+                return (false, "El campo fecha final garantia es obligatorio");
 
-            if (activoDTO.VALOR == 0)
-                return "El campo valor es obligatorio";
+            if (activoDTO.valor == 0)
+                return (false, "El campo valor es obligatorio");
 
-            if (activoDTO.FECHA_BAJA.Year < 2000)
-                return "El campo fecha baja es obligatorio";
+            //if (activoDTO.fechaBaja == null)
+            //    return (false, "El campo fecha baja es obligatorio");
 
-            if (string.IsNullOrEmpty(activoDTO.ESTADO))
-                return "El campo estado es obligatorio";
+            //if (string.IsNullOrEmpty(activoDTO.estado))
+            //    return (false, "El campo estado es obligatorio");
 
-            if (string.IsNullOrEmpty(activoDTO.OBSERVACION))
-                return "El campo observación es obligatorio";
+            //if (string.IsNullOrEmpty(activoDTO.observacion))
+            //    return (false, "El campo observación es obligatorio");
 
-            if (activoDTO.DEPENDENCIA_ID == 0)
-                return "El campo dependencia es obligatorio";
+            if (activoDTO.dependenciaId == 0)
+                return (false, "El campo dependencia es obligatorio");
 
             if (await new ServicioActivo().CrearActivo(activoDTO))
-                return "El registro se agregó correctamente";
+                return (true, "El registro se agregó correctamente");
             else
-                return "No se pudo guardar el registro";
+                return (false, "No se pudo guardar el registro");
         }
 
         public async Task<List<ActivoDTO>> ConsultarActivos()
@@ -61,7 +61,7 @@ namespace Web.Validacion.Aplicacion
             if (_id == 0)
                 return new ActivoDTO();
 
-            return await new ServicioActivo().ConsultarActivoPorId(_id);
+            return await new ServicioActivo().ConsultarActivo(_id);
         }
 
     }

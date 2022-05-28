@@ -8,22 +8,18 @@ namespace Web.Models.Aplicacion
 {
     public class ActivoDTO
     {
-        public int ACTIVO_ID { get; set; }
-        public int CLASE_ID { get; set; }
-        public int MARCA_ID { get; set; }
-        public int MODELO_ID { get; set; }
-        public string SERIAL { get; set; }
-        public DateTime FECHA_INGRESO { get; set; }
-        public DateTime FECHA_FINAL_GARANTIA { get; set; }
-        public double VALOR { get; set; }
-        public DateTime FECHA_BAJA { get; set; }
-        public string ESTADO { get; set; }
-        public string OBSERVACION { get; set; }
-        public int DEPENDENCIA_ID { get; set; }
-        public string USUARIO_CREACION { get; set; }
-        public DateTime FECHA_CREACION { get; set; }
-        public string USUARIO_MODIFICA { get; set; }
-        public DateTime? FECHA_MODIFICA { get; set; }
+        public int itemId { get; set; }
+        public int claseId { get; set; }
+        public int marcaId { get; set; }
+        public int modeloId { get; set; }
+        public string serial { get; set; }
+        public string fechaIngreso { get; set; }
+        public string fechaFinalGarantia { get; set; }
+        public double valor { get; set; }
+        public string fechaBaja { get; set; }
+        //public string estado { get; set; }
+        //public string observacion { get; set; }
+        public int dependenciaId { get; set; }
 
         public List<WorkFlowDTO> TICKETS { get; set; }
         public List<DiagnosticoDTO> DIAGNOSTICOS { get; set; }
