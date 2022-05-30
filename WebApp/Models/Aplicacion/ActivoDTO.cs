@@ -13,17 +13,23 @@ namespace Web.Models.Aplicacion
         public int marcaId { get; set; }
         public int modeloId { get; set; }
         public string serial { get; set; }
-        public string fechaIngreso { get; set; }
-        public string fechaFinalGarantia { get; set; }
+        public DateTime? fechaIngreso { get; set; }
+        public DateTime? fechaFinalGarantia { get; set; }
         public double valor { get; set; }
-        public string fechaBaja { get; set; }
-        //public string estado { get; set; }
-        //public string observacion { get; set; }
+        public DateTime? fechaBaja { get; set; }
+        public string estado { get; set; }
+        public string observacion { get; set; }
         public int dependenciaId { get; set; }
+        public string usuarioCreacion { get; set; }
+        public DateTime? fechaCreacion { get; set; }
+        public string usuarioModifica { get; set; }
 
-        public List<WorkFlowDTO> TICKETS { get; set; }
-        public List<DiagnosticoDTO> DIAGNOSTICOS { get; set; }
-        public List<ReparacionDTO> REPARACIONES { get; set; }
-        public List<EvaluacionDTO> EVALUACIONES { get; set; }
+        #region Transformaciones
+
+        public string fechaIngresoStr { get => this.fechaIngreso != null ? this.fechaIngreso.Value.ToShortDateString() : ""; }
+        public string fechaFinalGarantiaStr { get => this.fechaFinalGarantia != null ? this.fechaFinalGarantia.Value.ToShortDateString() : ""; }
+
+        #endregion
+
     }
 }

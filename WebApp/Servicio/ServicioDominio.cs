@@ -34,12 +34,58 @@ namespace Web.Servicio
             }
         }
 
+        public async Task<bool> ActualizarEmpleado(EmpleadoDTO empleadoDTO)
+        {
+            try
+            {
+                var client = new RestClient("http://34.122.37.103/inventory/type");
+                var request = new RestRequest(Method.PUT);
+                request.AddHeader("Content-Type", "application/json");
+                var body = JsonConvert.SerializeObject(empleadoDTO);
+                request.AddParameter("application/json", body, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                EmpleadoDTO resultado = JsonConvert.DeserializeObject<EmpleadoDTO>(response.Content);
+
+                if (resultado.EMPLEADO_ID != 0)
+                    return true;
+                else return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> CrearDependencia(DependenciaDTO dependenciaDTO)
         {
             try
             {
                 var client = new RestClient("http://34.122.37.103/inventory/dependency");
                 var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                var body = JsonConvert.SerializeObject(dependenciaDTO);
+                request.AddParameter("application/json", body, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                DependenciaDTO resultado = JsonConvert.DeserializeObject<DependenciaDTO>(response.Content);
+
+                if (resultado.dependenciaId != 0)
+                    return true;
+                else return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ActualizarDependencia(DependenciaDTO dependenciaDTO)
+        {
+            try
+            {
+                var client = new RestClient("http://34.122.37.103/inventory/dependency");
+                var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(dependenciaDTO);
                 request.AddParameter("application/json", body, ParameterType.RequestBody);
@@ -80,6 +126,29 @@ namespace Web.Servicio
             }
         }
 
+        public async Task<bool> ActualizarClase(ClaseDTO claseDTO)
+        {
+            try
+            {
+                var client = new RestClient("http://34.122.37.103/inventory/type");
+                var request = new RestRequest(Method.PUT);
+                request.AddHeader("Content-Type", "application/json");
+                var body = JsonConvert.SerializeObject(claseDTO);
+                request.AddParameter("application/json", body, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                ClaseDTO resultado = JsonConvert.DeserializeObject<ClaseDTO>(response.Content);
+
+                if (resultado.claseId != 0)
+                    return true;
+                else return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> CrearMarca(MarcaDTO marcaDTO)
         {
             try
@@ -103,12 +172,58 @@ namespace Web.Servicio
             }
         }
 
+        public async Task<bool> ActualizarMarca(MarcaDTO marcaDTO)
+        {
+            try
+            {
+                var client = new RestClient("http://34.122.37.103/inventory/brand");
+                var request = new RestRequest(Method.PUT);
+                request.AddHeader("Content-Type", "application/json");
+                var body = JsonConvert.SerializeObject(marcaDTO);
+                request.AddParameter("application/json", body, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                MarcaDTO resultado = JsonConvert.DeserializeObject<MarcaDTO>(response.Content);
+
+                if (resultado.marcaId != 0)
+                    return true;
+                else return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> CrearModelo(ModeloDTO modeloDTO)
         {
             try
             {
                 var client = new RestClient("http://34.122.37.103/inventory/model");
                 var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                var body = JsonConvert.SerializeObject(modeloDTO);
+                request.AddParameter("application/json", body, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                ModeloDTO resultado = JsonConvert.DeserializeObject<ModeloDTO>(response.Content);
+
+                if (resultado.modeloId != 0)
+                    return true;
+                else return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ActualizarModelo(ModeloDTO modeloDTO)
+        {
+            try
+            {
+                var client = new RestClient("http://34.122.37.103/inventory/model");
+                var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(modeloDTO);
                 request.AddParameter("application/json", body, ParameterType.RequestBody);

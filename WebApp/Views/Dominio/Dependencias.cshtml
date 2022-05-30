@@ -40,6 +40,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Vigente</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +50,7 @@
                                     <td>@item.dependenciaId</td>
                                     <td>@item.nombre</td>
                                     <td>@item.vigente</td>
+                                    <td class="text-center"><button class="btn btn-success" onclick="ModalActualizar(@item.dependenciaId, '@item.nombre', '@item.vigente')">Actualizar</button></td>
                                 </tr>
                             }
                         </tbody>
@@ -93,6 +95,49 @@
     </div>
 </div>
 
+<!-- Modal de actualización -->
+<div class="modal fade" id="myModal2" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-colored-header bg-success">
+                <h2 class="modal-title text-white" id="myLargeModalLabel">Actualizar @nombreVista</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="dependenciaIdAct" name="dependenciaIdAct" value="" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.Label("", "Nombre", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.Editor("nombreAct", new { htmlAttributes = new { @class = "form-control", type = "text", @Required = true, @id = "nombreAct", @placeholder = "Digite el nombre" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.Label("", "Vigente", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("VIGENTE", null, String.Format("Seleccione una opción"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "vigenteAct" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center" style="justify-content:center">
+                <button type="button" class="btn btn-success waves-effect" onclick="Actualizar()">
+                    <span class="fas fa-save"></span> Actualizar
+                </button>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div id="notificacion" style="margin:20px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
 <script src="~/Plantilla/assets/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -101,14 +146,74 @@
         $("#myModal1").modal("show");
     }
 
+    function ModalActualizar(_id, _nombre, _vigente) {
+        $("#dependenciaIdAct").val(_id);
+        $("#nombreAct").val(_nombre);
+        $("#vigenteAct").val(_vigente);
+        $("#myModal2").modal("show");
+    }
+
     function GuardarDependencia() {
         var dependenciaDTO =
         {
-            NOMBRE: $("#NOMBRE").val()
+            nombre: $("#nombre").val()
         };
 
         $.ajax({
             url: '@Url.Action("CrearDependencia", "Dominio")',
+            data: dependenciaDTO,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data.ok) {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: data.mensaje,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: data.mensaje,
+                        icon: 'warning',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error: function(xhr, status) {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    }
+
+    function Actualizar() {
+        var dependenciaDTO =
+        {
+            dependenciaId: $("#dependenciaIdAct").val(),
+            nombre: $("#nombreAct").val(),
+            vigente: $("#vigenteAct").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("ActualizarDependencia", "Dominio")',
             data: dependenciaDTO,
             type: 'POST',
             dataType: 'json',

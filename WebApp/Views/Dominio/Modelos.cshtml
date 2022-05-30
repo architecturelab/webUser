@@ -40,8 +40,8 @@
                                 <th>ID</th>
                                 <th>Marca Id</th>
                                 <th>Nombre</th>
-                                <th>Vida útil</th>
                                 <th>Vigente</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,8 +51,8 @@
                                     <td>@item.modeloId</td>
                                     <td>@item.marcaId</td>
                                     <td>@item.nombre</td>
-                                    <td>@item.vidaUtil</td>
                                     <td>@item.vigente</td>
+                                    <td class="text-center"><button class="btn btn-success" onclick="ModalActualizar(@item.modeloId, '@item.nombre', '@item.vigente', @item.marcaId)">Actualizar</button></td>
                                 </tr>
                             }
                         </tbody>
@@ -83,16 +83,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.Label("", "Vida útil", htmlAttributes: new { @class = "control-label col-md-12" })
-                            <div class="col-md-12">
-                                @Html.Editor("vidaUtil", new { htmlAttributes = new { @class = "form-control", type = "number", @Required = true, @id = "vidaUtil", @placeholder = "Digite la vida útil del elemento" } })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
                             @Html.Label("", "Nombre", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 @Html.Editor("nombre", new { htmlAttributes = new { @class = "form-control", type = "text", @Required = true, @id = "nombre", @placeholder = "Digite el nombre" } })
@@ -115,6 +105,58 @@
     </div>
 </div>
 
+<!-- Modal de actualización -->
+<div class="modal fade" id="myModal2" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-colored-header bg-success">
+                <h2 class="modal-title text-white" id="myLargeModalLabel">Actualizar @nombreVista</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modeloIdAct" name="modeloIdAct" value="" />
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.Label("", "Marca", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("MARCA", null, String.Format("Seleccione una marca"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "marcaIdAct" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.Label("", "Nombre", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.Editor("nombreAct", new { htmlAttributes = new { @class = "form-control", type = "text", @Required = true, @id = "nombreAct", @placeholder = "Digite el nombre" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.Label("", "Vigente", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("VIGENTE", null, String.Format("Seleccione una opción"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "vigenteAct" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center" style="justify-content:center">
+                <button type="button" class="btn btn-success waves-effect" onclick="Actualizar()">
+                    <span class="fas fa-save"></span> Actualizar
+                </button>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div id="notificacion" style="margin:20px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
 <script src="~/Plantilla/assets/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -123,16 +165,79 @@
         $("#myModal1").modal("show");
     }
 
+    
+    function ModalActualizar(_id, _nombre, _vigente, _marcaId) {
+        $("#modeloIdAct").val(_id);
+        $("#marcaIdAct").val(_marcaId);
+        $("#nombreAct").val(_nombre);
+        $("#vigenteAct").val(_vigente);
+        $("#myModal2").modal("show");
+    }
+
     function GuardarModelo() {
         var modeloDTO =
         {
             marcaId: $("#marca").val(),
-            vidaUtil: $("#vidaUtil").val(),
             nombre: $("#nombre").val()
         };
 
         $.ajax({
             url: '@Url.Action("CrearModelo", "Dominio")',
+            data: modeloDTO,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data.ok) {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: data.mensaje,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: data.mensaje,
+                        icon: 'warning',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error: function(xhr, status) {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    }
+
+    
+    function Actualizar() {
+        var modeloDTO =
+        {
+            modeloId: $("#modeloIdAct").val(),
+            marcaId: $("#marcaIdAct").val(),
+            nombre: $("#nombreAct").val(),
+            vigente: $("#vigenteAct").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("ActualizarModelo", "Dominio")',
             data: modeloDTO,
             type: 'POST',
             dataType: 'json',
