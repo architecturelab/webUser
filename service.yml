@@ -6,7 +6,9 @@ metadata:
     networking.gke.io/load-balancer-type: "Internal"
 spec:
   type: LoadBalancer
-  loadBalancerIP: "35.202.170.17"
+  loadBalancerIP: 35.202.170.17
+  externalIPs:
+    - 35.202.170.17
   ports:
     - protocol: TCP
       port: 80
