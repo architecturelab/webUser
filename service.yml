@@ -8,9 +8,9 @@ spec:
   type: LoadBalancer
   loadBalancerIP: "34.111.211.192"
   ports:
-    - protocol: TCP
+    - name: 80-to-80
+      protocol: TCP
       port: 80
       targetPort: 80
-      name: http
   selector:
     role: web-user
