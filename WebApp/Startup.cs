@@ -8,6 +8,7 @@ namespace WebApp
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using System;
+    using WebApp.Models.General;
 
     public class Startup
     {
@@ -21,20 +22,23 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MySettings>(Configuration.GetSection(MySettings.SectionName));
             services.AddControllersWithViews();
+            services.AddOptions();
+            
             services.AddRazorPages();
+
             #region Inicio de sesión basado en cookie
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
-                options.Cookie.Name = "_auth";
+                options.Cookie.Name = "_authGestionActivos";
                 options.Cookie.HttpOnly = true;
                 options.LoginPath = new PathString("/Cuenta/Login");
-                options.LogoutPath = new PathString("/account/logout");
+                options.LogoutPath = new PathString("/Cuenta/logout");
                 options.AccessDeniedPath = new PathString("/Cuenta/Login");
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(15);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(5000);
                 options.SlidingExpiration = false;
-
             });
             #endregion
         }

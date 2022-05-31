@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Web.Models.Aplicacion;
 using Web.Servicio;
+using WebApp.Models.General;
 
 namespace Web.Validacion.Aplicacion
 {

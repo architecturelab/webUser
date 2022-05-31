@@ -1,17 +1,18 @@
 ﻿namespace Web.Controllers
 {
-    using Web.Models.Aplicacion;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Web.Models.Aplicacion;
     using Web.Validacion.Aplicacion;
     using Web.Validacion.General;
 
     [Authorize]
     public class ActivoController : Controller
     {
+
         [HttpGet]
         [Authorize(Roles = "Administrador,Diagnosticador,Evaluaciones,Reparaciones")]
         public async Task<IActionResult> BandejaActivos()
@@ -65,7 +66,8 @@
 
         [HttpGet]
         [Authorize(Roles = "Administrador,Diagnosticador,Evaluaciones,Reparaciones")]
-        public async Task<IActionResult> DetalleGestionActivo(int _id) {
+        public async Task<IActionResult> DetalleGestionActivo(int _id)
+        {
 
             var resultado = await new ActivoValidacion().ConsultarActivoPorId(_id);
 

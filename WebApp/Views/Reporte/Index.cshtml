@@ -1,0 +1,203 @@
+﻿@{
+    string nombreVista = "KPI´S";
+}
+
+<link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Plantilla/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Reporte @nombreVista</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">@nombreVista</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<div class="row text-center">
+    <!-- column -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">KPI 1: Stock Disponible - Acopio de Elementos</h4>
+                <div>
+                    <canvas id="kpi1" height="90"></canvas>
+                </div>
+                <br />
+                <h4 class="card-title">Resultado Esperado: >=70% </h4>
+                <h4 class="card-title">Resultado Final: 30% </h4>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">KPI 2: Stock Descartados - Diagnostico</h4>
+                <div>
+                    <canvas id="kpi2" height="90"> </canvas>
+                </div>
+                <br />
+                <h4 class="card-title">Resultado Esperado: &lt;=30% </h4>
+                <h4 class="card-title">Resultado Final: 30% </h4>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">KPI 3: Oportunidad en Tiempo de Ejecución - Evaluación Costo/Beneficio</h4>
+                <div>
+                    <canvas id="kpi3" height="90"></canvas>
+                </div>
+                <br />
+                <h4 class="card-title">Resultado Esperado: >=70% </h4>
+                <h4 class="card-title">Resultado Final: 30% </h4>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">KPI 4: Nivel de Obsolescencia Tecnológica - Diagnostico</h4>
+                <div>
+                    <canvas id="kpi4" height="90"> </canvas>
+                </div>
+                <br />
+                <h4 class="card-title">Resultado Esperado: &lt;=20% </h4>
+                <h4 class="card-title">Resultado Final: 30% </h4>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">KPI 5: Tasa de retorno de equipos reparados - Reparación</h4>
+                <div>
+                    <canvas id="kpi5" height="90"></canvas>
+                </div>
+                <br />
+                <h4 class="card-title">Resultado Esperado: &lt;=10% </h4>
+                <h4 class="card-title">Resultado Final: 30% </h4>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">KPI 6: Costo de reposiciones por obsolescencia - Diagnostico</h4>
+                <div>
+                    <canvas id="kpi6" height="90"> </canvas>
+                </div>
+                <br />
+                <h4 class="card-title">Resultado Esperado: &lt;30% </h4>
+                <h4 class="card-title">Resultado Final: 30% </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
+<script src="~/Plantilla/assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- Chart JS -->
+<script src="~/Plantilla/assets/plugins/Chart.js/chartjs.init.js"></script>
+<script src="~/Plantilla/assets/plugins/Chart.js/Chart.min.js"></script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="~/Plantilla/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script>
+    $(function() {
+        new Chart(document.getElementById("kpi1"),
+            {
+                "type": "pie",
+                "data": {
+                    "labels": ["Total Elementos Disponibles", "Total Elementos"],
+                    "datasets": [{
+                        "label": "My First Dataset",
+                        "data": [300, 50],
+                        "backgroundColor": ["rgb(252, 75, 108)", "rgb(30, 136, 229)"]
+                    }
+                    ]
+                }
+            });
+
+        new Chart(document.getElementById("kpi2"),
+            {
+                "type": "doughnut",
+                "data": {
+                    "labels": ["Elementos Descartados", "Elementos Ingresados"],
+                    "datasets": [{
+                        "label": "My First Dataset",
+                        "data": [300, 50],
+                        "backgroundColor": ["rgb(252, 75, 250)", "rgb(30, 150, 229)"]
+                    }
+                    ]
+                }
+            });
+
+        new Chart(document.getElementById("kpi3"),
+            {
+                "type": "pie",
+                "data": {
+                    "labels": ["Numero de Viabilidades en menos de 7 días", "Numero de Viabilidades"],
+                    "datasets": [{
+                        "label": "My First Dataset",
+                        "data": [300, 50],
+                        "backgroundColor": ["rgb(90, 75, 108)", "rgb(30, 50, 229)"]
+                    }
+                    ]
+                }
+            });
+
+        new Chart(document.getElementById("kpi4"),
+            {
+                "type": "doughnut",
+                "data": {
+                    "labels": ["Total elementos con 20% vida útil o menos", "Total elementos"],
+                    "datasets": [{
+                        "label": "My First Dataset",
+                        "data": [300, 50],
+                        "backgroundColor": ["rgb(150, 75, 108)", "rgb(30, 136, 95)"]
+                    }
+                    ]
+                }
+            });
+
+        new Chart(document.getElementById("kpi5"),
+            {
+                "type": "pie",
+                "data": {
+                    "labels": ["Numero elementos reparados devueltos", "Número de elementos reparados"],
+                    "datasets": [{
+                        "label": "My First Dataset",
+                        "data": [300, 50],
+                        "backgroundColor": ["rgb(200, 75, 108)", "rgb(30, 136, 50)"]
+                    }
+                    ]
+                }
+            });
+
+        new Chart(document.getElementById("kpi6"),
+            {
+                "type": "doughnut",
+                "data": {
+                    "labels": ["Valor total de bienes obsoletos * 100", "Valor total de bienes disponibles"],
+                    "datasets": [{
+                        "label": "My First Dataset",
+                        "data": [300, 50],
+                        "backgroundColor": ["rgb(60, 160, 108)", "rgb(30, 168, 229)"]
+                    }
+                    ]
+                }
+            });
+    });
+</script>

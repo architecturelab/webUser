@@ -1,9 +1,9 @@
-﻿using Web.Models.Aplicacion;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Web.Models.Aplicacion;
 using Web.Validacion.Aplicacion;
 
 namespace Web.Controllers
