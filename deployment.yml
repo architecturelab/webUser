@@ -22,7 +22,6 @@ spec:
       containers:
       - name: web-user
         image: us.gcr.io/basearchitecture/web-user
-        externalIPs: "35.202.170.17"
         # image: us-central1-docker.pkg.dev/basearchitecture/quickstart-docker-repo/static-site:f8aa8222c1f8b7325b2612303146eb9d1aa4dd33
         ports:
         - containerPort: 80
