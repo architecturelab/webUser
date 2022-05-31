@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: web-user-lb
   annotations:
-    loadBalancerIP: "web-static-ip"
+    loadBalancerIP: "34.111.211.192"
 spec:
   type: LoadBalancer
   ports:
