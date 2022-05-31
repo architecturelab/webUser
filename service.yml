@@ -2,10 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-user-lb
-  annotations:
-    loadBalancerIP: "34.111.211.192"
 spec:
   type: LoadBalancer
+  loadBalancerIP: "34.111.211.192"
   ports:
     - protocol: TCP
       port: 80
@@ -13,4 +12,3 @@ spec:
       name: http
   selector:
     role: web-user
-  
