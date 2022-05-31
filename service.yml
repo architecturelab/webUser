@@ -3,8 +3,7 @@ kind: Service
 metadata:
   name: web-user-lb
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
-    
+    loadBalancerIP: "web-static-ip"
 spec:
   type: LoadBalancer
   ports:
