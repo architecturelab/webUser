@@ -12,7 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "EndPointServices": "http://34.122.37.103/",
+        "EndPointServices": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -22,7 +22,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "EndPointServices": "http://34.122.37.103/",
+        "EndPointServices": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -34,7 +34,7 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "environmentVariables": {
-        "EndPointServices": "http://34.122.37.103/",
+        "EndPointServices": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
         "ASPNETCORE_ENVIRONMENT": "Development"
