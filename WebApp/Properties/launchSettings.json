@@ -37,11 +37,11 @@
         "ServicesInventory": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
-        "ASPNETCORE_ENVIRONMENT": "Production" //"Development"
+        "ASPNETCORE_ENVIRONMENT": "Development" //"Development"
       },
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": false
     }
   }
 }
