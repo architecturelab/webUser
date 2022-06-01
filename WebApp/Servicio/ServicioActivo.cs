@@ -80,7 +80,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory /item/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ActivoDTO>(response.Content);

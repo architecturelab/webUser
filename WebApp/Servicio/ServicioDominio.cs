@@ -307,7 +307,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient("http://34.122.37.103/inventory/types");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/types");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<ClaseDTO>>(response.Content);
@@ -337,7 +337,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient("http://34.122.37.103/inventory/brands");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brands");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<MarcaDTO>>(response.Content);
@@ -367,7 +367,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient("http://34.122.37.103/inventory/models");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/models");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<ModeloDTO>>(response.Content);
