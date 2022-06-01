@@ -18,7 +18,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/item");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(activoDTO);
@@ -41,7 +41,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/item");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(activoDTO);
@@ -64,7 +64,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/items-plain");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/items-plain");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<ActivoDTO>>(response.Content);
@@ -80,7 +80,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory /item/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory /item/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ActivoDTO>(response.Content);

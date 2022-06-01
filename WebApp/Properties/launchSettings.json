@@ -12,20 +12,20 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "EndPointServices": "http://35.232.133.213/",
+        "ServicesInventory": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development" //"Development"
       }
     },
     "WebApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "EndPointServices": "http://35.232.133.213/",
+        "ServicesInventory": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development" //"Development"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "dotnetRunMessages": "true"
@@ -34,10 +34,10 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "environmentVariables": {
-        "EndPointServices": "http://35.232.133.213/",
+        "ServicesInventory": "http://35.232.133.213/",
         "User": "ArchitectureLab",
         "Password": "123456789",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production" //"Development"
       },
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,

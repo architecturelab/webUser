@@ -16,7 +16,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/type");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(empleadoDTO);
@@ -39,7 +39,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/type");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(empleadoDTO);
@@ -62,7 +62,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/dependency");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependency");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(dependenciaDTO);
@@ -85,7 +85,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/dependency");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependency");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(dependenciaDTO);
@@ -108,7 +108,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/type");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(claseDTO);
@@ -131,7 +131,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/type");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(claseDTO);
@@ -154,7 +154,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/brand");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(marcaDTO);
@@ -177,7 +177,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/brand");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(marcaDTO);
@@ -200,7 +200,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/model");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/model");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(modeloDTO);
@@ -223,7 +223,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/model");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/model");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(modeloDTO);
@@ -262,7 +262,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/dependency/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependency/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<DependenciaDTO>(response.Content);
@@ -277,7 +277,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/dependencies");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependencies");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<DependenciaDTO>>(response.Content);
@@ -292,7 +292,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/brand/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ClaseDTO>(response.Content);
@@ -322,7 +322,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/brand/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<MarcaDTO>(response.Content);
@@ -352,7 +352,7 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("EndPointServices")}inventory/model/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/model/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ModeloDTO>(response.Content);
