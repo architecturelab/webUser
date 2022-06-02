@@ -160,133 +160,73 @@
                         {
                             <button type="button" class="btn btn-success" onclick="AbrirModal()"> Ticket</button>
                         }
-
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Diagnosticador"))
-                        {
-                            <button type="button" class="btn btn-success" onclick="AbrirModal3()"> Diagnosticar</button>
-                        }
-
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Evaluaciones"))
-                        {
-                            <button type="button" class="btn btn-success" onclick="AbrirModal4()"> Evaluar</button>
-                        }
-
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Reparaciones"))
-                        {
-                            <button type="button" class="btn btn-success" onclick="AbrirModal5()"> Reparar</button>
-                        }
                     </div>
                 </div>
 
             </div>
             <div class="card-body">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Ticket</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" id="diagnostico-tab" data-toggle="tab" href="#diagnostico" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Diagnostico</span></a></li>
-                    <li class="nav-item"> <a class="nav-link" id="evaluacion-tab" data-toggle="tab" href="#evaluacion" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Evaluación</span></a></li>
-                    <li class="nav-item"> <a class="nav-link" id="reparacion-tab" data-toggle="tab" href="#reparacion" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Reparación</span></a></li>
-                </ul>
-                <div class="tab-content tabcontent-border p-20" id="myTabContent">
-                    <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
-                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>TicketId</th>
-                                    <th>Activo</th>
-                                    <th>Diagnostico</th>
-                                    <th>Fecha diagnostico</th>
-                                    <th>Evaluación</th>
-                                    <th>Fecha evaluación</th>
-                                    <th>Reparación</th>
-                                    <th>Fecha reparación</th>
-                                    <th>Fecha cierre</th>
-                                    <th>Usuario creación</th>
-                                    <th>Fecha creación</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.WorkFlows)
-                                {
-                                    <tr>
-                                        <td><span class="badge badge-success">@item.estado</span></td>
-                                        <td>@item.ticketId</td>
-                                        <td>@item.activoId</td>
-                                        <td>@item.diagnosticoId</td>
-                                        <td>@item.fechaDiagnostico</td>
-                                        <td>@item.evaluacionId</td>
-                                        <td>@item.fechaEvaluacion</td>
-                                        <td>@item.reparacionId</td>
-                                        <td>@item.fechaReparacion</td>
-                                        <td>@item.fechaCierre</td>
-                                        <td>@item.usuarioCreacion</td>
-                                        <td>@item.fechaCreacion</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="diagnostico" role="tabpanel" aria-labelledby="diagnostico-tab">
-                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Fecha del diagnostico</th>
-                                    <th>Apto</th>
-                                    <th>Reparación</th>
-                                    <th>Tecnico</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Se ve como dañado</td>
-                                    <td>30/04/2022</td>
-                                    <td>No</td>
-                                    <td>Si</td>
-                                    <td>Aldedier</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="evaluacion" role="tabpanel" aria-labelledby="evaluacion-tab">
-                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Fecha del evaluación</th>
-                                    <th>Decisión</th>
-                                    <th>Tecnico</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Se puede arreglar</td>
-                                    <td>30/04/2022</td>
-                                    <td>Si</td>
-                                    <td>Aldedier</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="reparacion" role="tabpanel" aria-labelledby="reparacion-tab">
-                        <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Fecha del reparación</th>
-                                    <th>Tecnico</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ya lo arregle</td>
-                                    <td>30/04/2022</td>
-                                    <td>Fabio</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Estado</th>
+                            <th>TicketId</th>
+                            <th>Diagnostico</th>
+                            <th>Fecha diagnostico</th>
+                            <th>Evaluación</th>
+                            <th>Fecha evaluación</th>
+                            <th>Reparación</th>
+                            <th>Fecha reparación</th>
+                            <th>Fecha cierre</th>
+                            <th>Usuario creación</th>
+                            <th>Fecha creación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.WorkFlows)
+                        {
+                            <tr>
+                                <td><span class="badge badge-success">@item.estado</span></td>
+                                <td>@item.ticketId</td>
+                                <td>
+                                    @if (@item.diagnosticoId != null)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-success" onclick="AbrirModal3ver(@item.diagnosticoId)">Ver</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-sm btn-warning">Pendiente</button>
+                                    }
+                                </td>
+                                <td>@item.fechaDiagnostico</td>
+                                <td>
+                                    @if (@item.evaluacionId != null)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-success" onclick="AbrirModal4ver(@item.evaluacionId)">Ver</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-sm btn-warning">Pendiente</button>
+                                    }
+                                </td>
+                                <td>@item.fechaEvaluacion</td>
+                                <td>
+                                    @if (@item.reparacionId != null)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-success" onclick="AbrirModal5ver(@item.reparacionId)">Ver</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-sm btn-warning">Pendiente</button>
+                                    }
+                                </td>
+                                <td>@item.fechaReparacion</td>
+                                <td>@item.fechaCierre</td>
+                                <td>@item.usuarioCreacion</td>
+                                <td>@item.fechaCreacion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -322,12 +262,12 @@
     </div>
 </div>
 
-<!-- Modal de creación Diagnosticador-->
-<div class="modal fade" id="myModal3" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal de ver Diagnosticador-->
+<div class="modal fade" id="myModal3ver" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header modal-colored-header bg-success">
-                <h2 class="modal-title text-white" id="myLargeModalLabel">Diagnosticar</h2>
+                <h2 class="modal-title text-white" id="myLargeModalLabel">Ver Diagnostico</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -337,7 +277,7 @@
                             @Html.Label("", "Apto", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "apto" })
+                                    <input class="form-control" type="text" id="aptoDiagnosticador" disabled />
                                 </div>
                             </div>
                         </div>
@@ -347,7 +287,7 @@
                             @Html.Label("", "Reparación", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "reparacion" })
+                                    <input class="form-control" type="text" id="reparacionDiagnosticador" disabled />
                                 </div>
                             </div>
                         </div>
@@ -359,7 +299,7 @@
                             @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcion" })
+                                    <textarea class="form-control" type="text" cols="10" rows="4" id="descripcionDiagnosticador" disabled></textarea>
                                 </div>
                             </div>
                         </div>
@@ -369,33 +309,23 @@
                             @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fechaCreacion" } })
+                                    <input class="form-control" type="text" id="fechaCreacionDiagnosticador" disabled />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer text-center" style="justify-content:center">
-                <button type="button" class="btn btn-success waves-effect" onclick="GuardarDiagnostico()">
-                    <span class="fas fa-save"></span> Guardar
-                </button>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <div id="notificacion" style="margin:20px"></div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
-<!-- Modal de creación Evaluaciones-->
-<div class="modal fade" id="myModal4" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal de ver Evaluaciones-->
+<div class="modal fade" id="myModal4ver" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header modal-colored-header bg-success">
-                <h2 class="modal-title text-white" id="myLargeModalLabel">Evaluar elemento</h2>
+                <h2 class="modal-title text-white" id="myLargeModalLabel">Ver Evaluación</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -405,7 +335,7 @@
                             @Html.Label("", "Desición Reparación", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "reparacion" })
+                                    <input class="form-control" type="text" id="reparacionEvaluaciones" disabled />
                                 </div>
                             </div>
                         </div>
@@ -415,7 +345,7 @@
                             @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fecha" } })
+                                    <input class="form-control" type="text" id="fechaEvaluaciones" disabled />
                                 </div>
                             </div>
                         </div>
@@ -427,33 +357,23 @@
                             @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcion" })
+                                    <textarea class="form-control" type="text" cols="10" rows="4" id="descripcionEvaluaciones" disabled></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer text-center" style="justify-content:center">
-                <button type="button" class="btn btn-success waves-effect" onclick="GuardarEvaluacion()">
-                    <span class="fas fa-save"></span> Guardar
-                </button>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <div id="notificacion" style="margin:20px"></div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
-<!-- Modal de creación Reparaciones-->
-<div class="modal fade" id="myModal5" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal de ver Reparaciones-->
+<div class="modal fade" id="myModal5ver" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header modal-colored-header bg-success">
-                <h2 class="modal-title text-white" id="myLargeModalLabel">Reportar reparación</h2>
+                <h2 class="modal-title text-white" id="myLargeModalLabel">Ver Reparación</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -463,7 +383,7 @@
                             @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcion" })
+                                    <textarea class="form-control" type="text" cols="10" rows="4" id="descripcionReparaciones" disabled></textarea>
                                 </div>
                             </div>
                         </div>
@@ -473,21 +393,11 @@
                             @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fecha" } })
+                                    <input class="form-control" type="text" id="fechaReparaciones" disabled />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer text-center" style="justify-content:center">
-                <button type="button" class="btn btn-success waves-effect" onclick="GuardarReparacion()">
-                    <span class="fas fa-save"></span> Guardar
-                </button>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <div id="notificacion" style="margin:20px"></div>
                 </div>
             </div>
         </div>
@@ -612,7 +522,6 @@
     </div>
 </div>
 
-
 <script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
 <script src="~/Plantilla/assets/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -621,16 +530,63 @@
         $("#myModal1").modal("show");
     }
 
-    function AbrirModal3() {
-        $("#myModal3").modal("show");
+    function AbrirModal3ver(_id) {
+
+        $.ajax({
+            url: '@Url.Action("ConsultarDiagnosticoPorId", "Diagnostico")',
+            data: { _id : _id},
+            type: 'POST',
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                $("#aptoDiagnosticador").val(data.apto == true ? "SI": "NO");
+                $("#reparacionDiagnosticador").val(data.reparacion == true ? "SI": "NO");
+                $("#descripcionDiagnosticador").val(data.descripcion);
+                $("#fechaCreacionDiagnosticador").val(data.fechaCreacionStr);
+                $("#myModal3ver").modal("show");
+            },
+            error: function(xhr, status) {
+                $("#myModal3ver").modal("show");
+            }
+        });
     }
 
-    function AbrirModal4() {
-        $("#myModal4").modal("show");
+    function AbrirModal4ver(_id) {
+
+        $.ajax({
+            url: '@Url.Action("ConsultarEvaluacionPorId", "Evaluacion")',
+            data: { _id : _id},
+            type: 'POST',
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                $("#reparacionEvaluaciones").val(data.apto == true ? "SI": "NO");
+                $("#descripcionEvaluaciones").val(data.descripcion);
+                $("#fechaEvaluaciones").val(data.fechaCreacionStr);
+                $("#myModal4ver").modal("show");
+            },
+            error: function(xhr, status) {
+                $("#myModal4ver").modal("show");
+            }
+        });
     }
 
-    function AbrirModal5() {
-        $("#myModal5").modal("show");
+    function AbrirModal5ver(_id) {
+           $.ajax({
+            url: '@Url.Action("ConsultarReparacionPorId", "Reparacion")',
+            data: { _id : _id},
+            type: 'POST',
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                $("#descripcionReparaciones").val(data.descripcion);
+                $("#fechaReparaciones").val(data.fechaCreacionStr);
+                $("#myModal5ver").modal("show");
+            },
+            error: function(xhr, status) {
+                $("#myModal5ver").modal("show");
+            }
+        });
     }
 
     function ModalActualizar() {

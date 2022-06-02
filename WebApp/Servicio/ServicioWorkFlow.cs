@@ -9,11 +9,13 @@ namespace WebApp.Servicio
 {
     public class ServicioWorkFlow
     {
-        public async Task<bool> CrearWorkFlow(WorkFlowDTO workFlowDTO)
+        private string urlServicio = Environment.GetEnvironmentVariable("ServicesWorkFlow") != null ? Environment.GetEnvironmentVariable("ServicesWorkFlow") : "http://35.202.170.17/";
+
+        public bool CrearWorkFlow(WorkFlowDTO workFlowDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/ticket");
+                var client = new RestClient($"{urlServicio}workflow/ticket");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(workFlowDTO);
@@ -32,11 +34,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
+        public bool ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/ticket");
+                var client = new RestClient($"{urlServicio}workflow/ticket");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(workFlowDTO);
@@ -55,11 +57,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<WorkFlowDTO>> ConsultarWorkFlows()
+        public List<WorkFlowDTO> ConsultarWorkFlows()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/tickets");
+                var client = new RestClient($"{urlServicio}workflow/tickets");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<WorkFlowDTO>>(response.Content);
@@ -70,11 +72,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<WorkFlowDTO> ConsultarWorkFlow(int _id)
+        public WorkFlowDTO ConsultarWorkFlow(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/ticket/{_id}");
+                var client = new RestClient($"{urlServicio}workflow/ticket/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<WorkFlowDTO>(response.Content);

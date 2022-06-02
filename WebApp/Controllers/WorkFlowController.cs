@@ -13,29 +13,35 @@ namespace WebApp.Controllers
     {
         [HttpGet]
         [Authorize(Roles = "Administrador,Almacenista")]
-        public async Task<IActionResult> Bandeja()
+        public IActionResult Bandeja()
         {
-            return View(await new WorkFlowValidacion().ConsultarWorkFlows());
+
+            List<SelectListItem> items2 = new List<SelectListItem>();
+            items2.Add(new SelectListItem { Text = "SI", Value = "true" });
+            items2.Add(new SelectListItem { Text = "NO", Value = "false" });
+            ViewBag.DESICION = new SelectList(items2, "Value", "Text");
+
+            return View(new WorkFlowValidacion().ConsultarWorkFlows());
         }
 
         [HttpPost]
-        public async Task<JsonResult> CrearWorkFlow(WorkFlowDTO workFlowDTO)
+        public JsonResult CrearWorkFlow(WorkFlowDTO workFlowDTO)
         {
             GestionClaims claim = new GestionClaims(User);
             workFlowDTO.usuarioCreacion = $"{claim.Nombres} {claim.Apellidos}";
             workFlowDTO.fechaCreacion = System.DateTime.Now;
 
-            (bool, string) resultado = await new WorkFlowValidacion().ValidacionWorkFlowAsync(workFlowDTO);
+            (bool, string) resultado = new WorkFlowValidacion().ValidacionWorkFlowAsync(workFlowDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         [HttpPost]
-        public async Task<JsonResult> ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
+        public JsonResult ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
         {
             GestionClaims claim = new GestionClaims(User);
             workFlowDTO.usuarioModifica = $"{claim.Nombres} {claim.Apellidos}";
 
-            (bool, string) resultado = await new WorkFlowValidacion().ValidacionWorkFlowActualizarAsync(workFlowDTO);
+            (bool, string) resultado = new WorkFlowValidacion().ValidacionWorkFlowActualizarAsync(workFlowDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
     }

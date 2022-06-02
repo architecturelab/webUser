@@ -11,117 +11,117 @@ namespace WebApp.Controllers
     [Authorize]
     public class DominioController : Controller
     {
-        public async Task<IActionResult> Empleados()
+        public IActionResult Empleados()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "SI", Value = "SI" });
             items.Add(new SelectListItem { Text = "NO", Value = "NO" });
             ViewBag.VIGENTE = new SelectList(items, "Text", "Value");
 
-            return View(await new DominioValidacion().ConsultarEmpleados());
+            return View(new DominioValidacion().ConsultarEmpleados());
         }
 
         [HttpPost]
-        public async Task<JsonResult> CrearEmpleado(EmpleadoDTO empleadoDTO)
+        public JsonResult CrearEmpleado(EmpleadoDTO empleadoDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ValidacionEmpleadoAsync(empleadoDTO);
+            (bool, string) resultado = new DominioValidacion().ValidacionEmpleadoAsync(empleadoDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
-        public async Task<IActionResult> Dependencias()
+        public IActionResult Dependencias()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "SI", Value = "SI" });
             items.Add(new SelectListItem { Text = "NO", Value = "NO" });
             ViewBag.VIGENTE = new SelectList(items, "Text", "Value");
             
-            return View(await new DominioValidacion().ConsultarDependencias());
+            return View(new DominioValidacion().ConsultarDependencias());
         }
 
         [HttpPost]
-        public async Task<JsonResult> CrearDependencia(DependenciaDTO dependenciaDTO)
+        public JsonResult CrearDependencia(DependenciaDTO dependenciaDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ValidacionDependenciaAsync(dependenciaDTO);
+            (bool, string) resultado = new DominioValidacion().ValidacionDependenciaAsync(dependenciaDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         [HttpPost]
-        public async Task<JsonResult> ActualizarDependencia(DependenciaDTO dependenciaDTO)
+        public JsonResult ActualizarDependencia(DependenciaDTO dependenciaDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ActualizarDependenciaAsync(dependenciaDTO);
+            (bool, string) resultado = new DominioValidacion().ActualizarDependenciaAsync(dependenciaDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
-        public async Task<IActionResult> Clases()
+        public IActionResult Clases()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "SI", Value = "SI" });
             items.Add(new SelectListItem { Text = "NO", Value = "NO" });
             ViewBag.VIGENTE = new SelectList(items, "Text", "Value");
 
-            return View(await new DominioValidacion().ConsultarClases());
+            return View(new DominioValidacion().ConsultarClases());
         }
 
         [HttpPost]
-        public async Task<JsonResult> CrearClase(ClaseDTO claseDTO)
+        public JsonResult CrearClase(ClaseDTO claseDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ValidacionClaseAsync(claseDTO);
+            (bool, string) resultado = new DominioValidacion().ValidacionClaseAsync(claseDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         [HttpPost]
-        public async Task<JsonResult> ActualizarClase(ClaseDTO claseDTO)
+        public JsonResult ActualizarClase(ClaseDTO claseDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ActualizarClaseAsync(claseDTO);
+            (bool, string) resultado = new DominioValidacion().ActualizarClaseAsync(claseDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
-        public async Task<IActionResult> Marcas()
+        public IActionResult Marcas()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "SI", Value = "SI" });
             items.Add(new SelectListItem { Text = "NO", Value = "NO" });
             ViewBag.VIGENTE = new SelectList(items, "Text", "Value");
 
-            return View(await new DominioValidacion().ConsultarMarcas());
+            return View(new DominioValidacion().ConsultarMarcas());
         }
 
         [HttpPost]
-        public async Task<JsonResult> CrearMarca(MarcaDTO marcaDTO)
+        public JsonResult CrearMarca(MarcaDTO marcaDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ValidacionMarcaAsync(marcaDTO);
+            (bool, string) resultado = new DominioValidacion().ValidacionMarcaAsync(marcaDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         [HttpPost]
-        public async Task<JsonResult> ActualizarMarca(MarcaDTO marcaDTO)
+        public JsonResult ActualizarMarca(MarcaDTO marcaDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ActualizarMarcaAsync(marcaDTO);
+            (bool, string) resultado = new DominioValidacion().ActualizarMarcaAsync(marcaDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
-        public async Task<IActionResult> Modelos()
+        public IActionResult Modelos()
         {
-            ViewBag.MARCA = new SelectList(await new DominioValidacion().ConsultarMarcas(), "marcaId", "nombre");
+            ViewBag.MARCA = new SelectList(new DominioValidacion().ConsultarMarcas(), "marcaId", "nombre");
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "SI", Value = "SI" });
             items.Add(new SelectListItem { Text = "NO", Value = "NO" });
             ViewBag.VIGENTE = new SelectList(items, "Text", "Value");
 
-            return View(await new DominioValidacion().ConsultarModelos());
+            return View(new DominioValidacion().ConsultarModelos());
         }
 
         [HttpPost]
-        public async Task<JsonResult> CrearModelo(ModeloDTO modeloDTO)
+        public JsonResult CrearModelo(ModeloDTO modeloDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ValidacionModeloAsync(modeloDTO);
+            (bool, string) resultado = new DominioValidacion().ValidacionModeloAsync(modeloDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
 
         [HttpPost]
-        public async Task<JsonResult> ActualizarModelo(ModeloDTO modeloDTO)
+        public JsonResult ActualizarModelo(ModeloDTO modeloDTO)
         {
-            (bool, string) resultado = await new DominioValidacion().ActualizarModeloAsync(modeloDTO);
+            (bool, string) resultado = new DominioValidacion().ActualizarModeloAsync(modeloDTO);
             return Json(new { ok = resultado.Item1, mensaje = resultado.Item2 });
         }
     }

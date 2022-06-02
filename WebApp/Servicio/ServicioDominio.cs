@@ -12,11 +12,13 @@ namespace WebApp.Servicio
 {
     public class ServicioDominio
     {
-        public async Task<bool> CrearEmpleado(EmpleadoDTO empleadoDTO)
+        private string urlServicio = Environment.GetEnvironmentVariable("ServicesInventory") != null ? Environment.GetEnvironmentVariable("ServicesInventory") : "http://104.197.60.202/";
+
+        public bool CrearEmpleado(EmpleadoDTO empleadoDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
+                var client = new RestClient($"{urlServicio}inventory/type");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(empleadoDTO);
@@ -35,11 +37,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarEmpleado(EmpleadoDTO empleadoDTO)
+        public bool ActualizarEmpleado(EmpleadoDTO empleadoDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
+                var client = new RestClient($"{urlServicio}inventory/type");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(empleadoDTO);
@@ -58,11 +60,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> CrearDependencia(DependenciaDTO dependenciaDTO)
+        public bool CrearDependencia(DependenciaDTO dependenciaDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependency");
+                var client = new RestClient($"{urlServicio}inventory/dependency");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(dependenciaDTO);
@@ -81,11 +83,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarDependencia(DependenciaDTO dependenciaDTO)
+        public bool ActualizarDependencia(DependenciaDTO dependenciaDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependency");
+                var client = new RestClient($"{urlServicio}inventory/dependency");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(dependenciaDTO);
@@ -104,11 +106,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> CrearClase(ClaseDTO claseDTO)
+        public bool CrearClase(ClaseDTO claseDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
+                var client = new RestClient($"{urlServicio}inventory/type");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(claseDTO);
@@ -127,11 +129,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarClase(ClaseDTO claseDTO)
+        public bool ActualizarClase(ClaseDTO claseDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type");
+                var client = new RestClient($"{urlServicio}inventory/type");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(claseDTO);
@@ -150,11 +152,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> CrearMarca(MarcaDTO marcaDTO)
+        public bool CrearMarca(MarcaDTO marcaDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand");
+                var client = new RestClient($"{urlServicio}inventory/brand");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(marcaDTO);
@@ -173,11 +175,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarMarca(MarcaDTO marcaDTO)
+        public bool ActualizarMarca(MarcaDTO marcaDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand");
+                var client = new RestClient($"{urlServicio}inventory/brand");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(marcaDTO);
@@ -196,11 +198,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> CrearModelo(ModeloDTO modeloDTO)
+        public bool CrearModelo(ModeloDTO modeloDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/model");
+                var client = new RestClient($"{urlServicio}inventory/model");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(modeloDTO);
@@ -219,11 +221,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarModelo(ModeloDTO modeloDTO)
+        public bool ActualizarModelo(ModeloDTO modeloDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/model");
+                var client = new RestClient($"{urlServicio}inventory/model");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(modeloDTO);
@@ -242,14 +244,14 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<EmpleadoDTO>> ConsultarEmpleados()
+        public List<EmpleadoDTO> ConsultarEmpleados()
         {
             try
             {
                 //var client = new RestClient("https://rickandmortyapi.com/api/character");
                 //var request = new RestRequest(Method.GET);
                 //IRestResponse response = client.Execute(request);
-                //return JsonConvert.DeserializeObject<bool>(response.Content);
+                //return JsonConvert.DeserializeObject<bool(response.Content);
                 return new List<EmpleadoDTO>();
             }
             catch (Exception ex)
@@ -258,11 +260,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<DependenciaDTO> ConsultarDependencia(int _id)
+        public DependenciaDTO ConsultarDependencia(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependency/{_id}");
+                var client = new RestClient($"{urlServicio}inventory/dependency/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<DependenciaDTO>(response.Content);
@@ -273,11 +275,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<DependenciaDTO>> ConsultarDependencias()
+        public List<DependenciaDTO> ConsultarDependencias()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/dependencies");
+                var client = new RestClient($"{urlServicio}inventory/dependencies");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<DependenciaDTO>>(response.Content);
@@ -288,11 +290,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<ClaseDTO> ConsultarClase(int _id)
+        public ClaseDTO ConsultarClase(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type/{_id}");
+                var client = new RestClient($"{urlServicio}inventory/type/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ClaseDTO>(response.Content);
@@ -304,11 +306,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<ClaseDTO>> ConsultarClases()
+        public List<ClaseDTO> ConsultarClases()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/types");
+                var client = new RestClient($"{urlServicio}inventory/types");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<ClaseDTO>>(response.Content);
@@ -319,11 +321,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<MarcaDTO> ConsultarMarca(int _id)
+        public MarcaDTO ConsultarMarca(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand/{_id}");
+                var client = new RestClient($"{urlServicio}inventory/brand/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<MarcaDTO>(response.Content);
@@ -334,11 +336,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<MarcaDTO>> ConsultarMarcas()
+        public List<MarcaDTO> ConsultarMarcas()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brands");
+                var client = new RestClient($"{urlServicio}inventory/brands");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<MarcaDTO>>(response.Content);
@@ -349,11 +351,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<ModeloDTO> ConsultarModelo(int _id)
+        public ModeloDTO ConsultarModelo(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/model/{_id}");
+                var client = new RestClient($"{urlServicio}inventory/model/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ModeloDTO>(response.Content);
@@ -364,11 +366,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<ModeloDTO>> ConsultarModelos()
+        public List<ModeloDTO> ConsultarModelos()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/models");
+                var client = new RestClient($"{urlServicio}inventory/models");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<ModeloDTO>>(response.Content);

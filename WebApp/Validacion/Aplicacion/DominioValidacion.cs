@@ -7,7 +7,7 @@ namespace WebApp.Validacion.Aplicacion
 {
     public class DominioValidacion
     {
-        public async Task<(bool, string)> ValidacionEmpleadoAsync(EmpleadoDTO empleadoDTO)
+        public (bool, string) ValidacionEmpleadoAsync(EmpleadoDTO empleadoDTO)
         {
             if (string.IsNullOrEmpty(empleadoDTO.NOMBRE))
                 return (false, "El campo nombres es obligatorio");
@@ -24,13 +24,13 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(empleadoDTO.AREA))
                 return (false, "El campo area es obligatorio");
 
-            if (await new ServicioDominio().CrearEmpleado(empleadoDTO))
+            if (new ServicioDominio().CrearEmpleado(empleadoDTO))
                 return (true, "El registro se agregó correctamente");
             else
                 return (false, "No se pudo guardar el registro");
         }
 
-        public async Task<(bool, string)> ActualizarEmpleadoAsync(EmpleadoDTO empleadoDTO)
+        public (bool, string) ActualizarEmpleadoAsync(EmpleadoDTO empleadoDTO)
         {
             if (empleadoDTO.EMPLEADO_ID == 0)
                 return (false, "El campo id es obligatorio");
@@ -50,24 +50,24 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(empleadoDTO.AREA))
                 return (false, "El campo area es obligatorio");
 
-            if (await new ServicioDominio().ActualizarEmpleado(empleadoDTO))
+            if (new ServicioDominio().ActualizarEmpleado(empleadoDTO))
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");
         }
 
-        public async Task<(bool, string)> ValidacionDependenciaAsync(DependenciaDTO dependenciaDTO)
+        public (bool, string) ValidacionDependenciaAsync(DependenciaDTO dependenciaDTO)
         {
             if (string.IsNullOrEmpty(dependenciaDTO.nombre))
                 return (false, "El campo nombre es obligatorio");
 
-            if (await new ServicioDominio().CrearDependencia(dependenciaDTO))
+            if (new ServicioDominio().CrearDependencia(dependenciaDTO))
                 return (true, "El registro se agregó correctamente");
             else
                 return (false, "No se pudo guardar el registro");
         }
 
-        public async Task<(bool, string)> ActualizarDependenciaAsync(DependenciaDTO dependenciaDTO)
+        public (bool, string) ActualizarDependenciaAsync(DependenciaDTO dependenciaDTO)
         {
             if (dependenciaDTO.dependenciaId == 0)
                 return (false, "El campo id es obligatorio");
@@ -78,13 +78,13 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(dependenciaDTO.vigente))
                 return (false, "El campo vigente es obligatorio");
 
-            if (await new ServicioDominio().ActualizarDependencia(dependenciaDTO))
+            if (new ServicioDominio().ActualizarDependencia(dependenciaDTO))
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");
         }
 
-        public async Task<(bool, string)> ValidacionClaseAsync(ClaseDTO claseDTO)
+        public (bool, string) ValidacionClaseAsync(ClaseDTO claseDTO)
         {
             if (string.IsNullOrEmpty(claseDTO.nombre))
                 return (false, "El campo nombre es obligatorio");
@@ -92,13 +92,13 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(claseDTO.vidaUtil))
                 return (false, "El campo vida útil es obligatorio");
 
-            if (await new ServicioDominio().CrearClase(claseDTO))
+            if (new ServicioDominio().CrearClase(claseDTO))
                 return (true, "El registro se agregó correctamente");
             else
                 return (false, "No se pudo guardar el registro");
         }
 
-        public async Task<(bool, string)> ActualizarClaseAsync(ClaseDTO claseDTO)
+        public (bool, string) ActualizarClaseAsync(ClaseDTO claseDTO)
         {
             if (claseDTO.claseId == 0)
                 return (false, "El campo id es obligatorio");
@@ -112,24 +112,24 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(claseDTO.vigente))
                 return (false, "El campo vigente es obligatorio");
 
-            if (await new ServicioDominio().ActualizarClase(claseDTO))
+            if (new ServicioDominio().ActualizarClase(claseDTO))
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");
         }
 
-        public async Task<(bool, string)> ValidacionMarcaAsync(MarcaDTO marcaDTO)
+        public (bool, string) ValidacionMarcaAsync(MarcaDTO marcaDTO)
         {
             if (string.IsNullOrEmpty(marcaDTO.nombre))
                 return (false, "El campo nombre es obligatorio");
 
-            if (await new ServicioDominio().CrearMarca(marcaDTO))
+            if (new ServicioDominio().CrearMarca(marcaDTO))
                 return (true, "El registro se agregó correctamente");
             else
                 return (false, "No se pudo guardar el registro");
         }
 
-        public async Task<(bool, string)> ActualizarMarcaAsync(MarcaDTO marcaDTO)
+        public (bool, string) ActualizarMarcaAsync(MarcaDTO marcaDTO)
         {
             if (marcaDTO.marcaId == 0)
                 return (false, "El campo id es obligatorio");
@@ -140,13 +140,13 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(marcaDTO.vigente))
                 return (false, "El campo vigente es obligatorio");
 
-            if (await new ServicioDominio().ActualizarMarca(marcaDTO))
+            if (new ServicioDominio().ActualizarMarca(marcaDTO))
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");
         }
 
-        public async Task<(bool, string)> ValidacionModeloAsync(ModeloDTO modeloDTO)
+        public (bool, string) ValidacionModeloAsync(ModeloDTO modeloDTO)
         {
             if (modeloDTO.marcaId == 0)
                 return (false, "El campo marca es obligatorio");
@@ -154,13 +154,13 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(modeloDTO.nombre))
                 return (false, "El campo nombre es obligatorio");
 
-            if (await new ServicioDominio().CrearModelo(modeloDTO))
+            if (new ServicioDominio().CrearModelo(modeloDTO))
                 return (true, "El registro se agregó correctamente");
             else
                 return (false, "No se pudo guardar el registro");
         }
 
-        public async Task<(bool, string)> ActualizarModeloAsync(ModeloDTO modeloDTO)
+        public (bool, string) ActualizarModeloAsync(ModeloDTO modeloDTO)
         {
             if (modeloDTO.modeloId == 0)
                 return (false, "El campo id es obligatorio");
@@ -174,55 +174,55 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(modeloDTO.vigente))
                 return (false, "El campo vigente es obligatorio");
 
-            if (await new ServicioDominio().ActualizarModelo(modeloDTO))
+            if (new ServicioDominio().ActualizarModelo(modeloDTO))
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");
         }
 
-        public async Task<List<EmpleadoDTO>> ConsultarEmpleados()
+        public List<EmpleadoDTO> ConsultarEmpleados()
         {
-            return await new ServicioDominio().ConsultarEmpleados();
+            return new ServicioDominio().ConsultarEmpleados();
         }
 
-        public async Task<DependenciaDTO> ConsultarDependencia(int _id)
+        public DependenciaDTO ConsultarDependencia(int _id)
         {
-            return await new ServicioDominio().ConsultarDependencia(_id);
+            return new ServicioDominio().ConsultarDependencia(_id);
         }
 
-        public async Task<List<DependenciaDTO>> ConsultarDependencias()
+        public List<DependenciaDTO> ConsultarDependencias()
         {
-            return await new ServicioDominio().ConsultarDependencias();
+            return new ServicioDominio().ConsultarDependencias();
         }
 
-        public async Task<ClaseDTO> ConsultarClase(int _id)
+        public ClaseDTO ConsultarClase(int _id)
         {
-            return await new ServicioDominio().ConsultarClase(_id);
+            return new ServicioDominio().ConsultarClase(_id);
         }
 
-        public async Task<List<ClaseDTO>> ConsultarClases()
+        public List<ClaseDTO> ConsultarClases()
         {
-            return await new ServicioDominio().ConsultarClases();
+            return new ServicioDominio().ConsultarClases();
         }
 
-        public async Task<MarcaDTO> ConsultarMarca(int _id)
+        public MarcaDTO ConsultarMarca(int _id)
         {
-            return await new ServicioDominio().ConsultarMarca(_id);
+            return new ServicioDominio().ConsultarMarca(_id);
         }
 
-        public async Task<List<MarcaDTO>> ConsultarMarcas()
+        public List<MarcaDTO> ConsultarMarcas()
         {
-            return await new ServicioDominio().ConsultarMarcas();
+            return new ServicioDominio().ConsultarMarcas();
         }
 
-        public async Task<ModeloDTO> ConsultarModelo(int _id)
+        public ModeloDTO ConsultarModelo(int _id)
         {
-            return await new ServicioDominio().ConsultarModelo(_id);
+            return new ServicioDominio().ConsultarModelo(_id);
         }
 
-        public async Task<List<ModeloDTO>> ConsultarModelos()
+        public List<ModeloDTO> ConsultarModelos()
         {
-            return await new ServicioDominio().ConsultarModelos();
+            return new ServicioDominio().ConsultarModelos();
         }
 
     }

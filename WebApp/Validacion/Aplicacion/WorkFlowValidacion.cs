@@ -7,20 +7,20 @@ namespace WebApp.Validacion.Aplicacion
 {
     public class WorkFlowValidacion
     {
-        public async Task<(bool, string)> ValidacionWorkFlowAsync(WorkFlowDTO workFlowDTO)
+        public (bool, string) ValidacionWorkFlowAsync(WorkFlowDTO workFlowDTO)
         {
             if (workFlowDTO.activoId == 0)
                 return (false, "El campo activoId es obligatorio");
 
             workFlowDTO.estado = "Diagnostico";
 
-            if (await new ServicioWorkFlow().CrearWorkFlow(workFlowDTO))
+            if (new ServicioWorkFlow().CrearWorkFlow(workFlowDTO))
                 return (true, "El registro se agregó correctamente");
             else
                 return (false, "No se pudo guardar el registro");
         }
 
-        public async Task<(bool, string)> ValidacionWorkFlowActualizarAsync(WorkFlowDTO workFlowDTO)
+        public (bool, string) ValidacionWorkFlowActualizarAsync(WorkFlowDTO workFlowDTO)
         {
             if (workFlowDTO.activoId == 0)
                 return (false, "El campo activoId es obligatorio");
@@ -32,23 +32,23 @@ namespace WebApp.Validacion.Aplicacion
             else if (workFlowDTO.estado == "Reparación")
                 workFlowDTO.estado = "Cerrado";
 
-            if (await new ServicioWorkFlow().ActualizarWorkFlow(workFlowDTO))
+            if (new ServicioWorkFlow().ActualizarWorkFlow(workFlowDTO))
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");
         }
 
-        public async Task<List<WorkFlowDTO>> ConsultarWorkFlows()
+        public List<WorkFlowDTO> ConsultarWorkFlows()
         {
-            return await new ServicioWorkFlow().ConsultarWorkFlows();
+            return new ServicioWorkFlow().ConsultarWorkFlows();
         }
 
-        public async Task<WorkFlowDTO> ConsultarWorkFlowPorId(int _id)
+        public WorkFlowDTO ConsultarWorkFlowPorId(int _id)
         {
             if (_id == 0)
                 return new WorkFlowDTO();
 
-            return await new ServicioWorkFlow().ConsultarWorkFlow(_id);
+            return new ServicioWorkFlow().ConsultarWorkFlow(_id);
         }
 
     }

@@ -9,11 +9,13 @@ namespace WebApp.Servicio
 {
     public class ServicioActivo
     {
-        public async Task<bool> CrearActivo(ActivoDTO activoDTO)
+        private string urlServicio = Environment.GetEnvironmentVariable("ServicesInventory") != null ? Environment.GetEnvironmentVariable("ServicesInventory") : "http://104.197.60.202/";
+
+        public bool CrearActivo(ActivoDTO activoDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item");
+                var client = new RestClient($"{urlServicio}inventory/item");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(activoDTO);
@@ -32,11 +34,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarActivo(ActivoDTO activoDTO)
+        public bool ActualizarActivo(ActivoDTO activoDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item");
+                var client = new RestClient($"{urlServicio}inventory/item");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
                 var body = JsonConvert.SerializeObject(activoDTO);
@@ -55,11 +57,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<ActivoDTO>> ConsultarActivos()
+        public List<ActivoDTO> ConsultarActivos()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/items-plain");
+                var client = new RestClient($"{urlServicio}inventory/items-plain");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<List<ActivoDTO>>(response.Content);
@@ -70,11 +72,11 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<ActivoDTO> ConsultarActivo(int _id)
+        public ActivoDTO ConsultarActivo(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item/{_id}");
+                var client = new RestClient($"{urlServicio}inventory/item/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ActivoDTO>(response.Content);
