@@ -1,12 +1,7 @@
-﻿using Web.Models.Aplicacion;
-using Web.Servicio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WebApp.Models.Aplicacion;
+using WebApp.Servicio;
 
-namespace Web.Validacion.Aplicacion
+namespace WebApp.Validacion.Aplicacion
 {
     public class RickyMortyValidacion
     {

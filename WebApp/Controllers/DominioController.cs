@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Web.Models.Aplicacion;
-using Web.Validacion.Aplicacion;
+using WebApp.Models.Aplicacion;
+using WebApp.Validacion.Aplicacion;
 
-namespace Web.Controllers
+namespace WebApp.Controllers
 {
     [Authorize]
     public class DominioController : Controller

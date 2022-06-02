@@ -1,14 +1,10 @@
-﻿using Web.Models.Aplicacion;
-using Web.Servicio;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Web.Validacion.General;
-using WebApp.Models.General;
+using WebApp.Models.Aplicacion;
+using WebApp.Servicio;
 
-namespace Web.Validacion.Aplicacion
+namespace WebApp.Validacion.Aplicacion
 {
     public class ActivoValidacion
     {
@@ -98,7 +94,40 @@ namespace Web.Validacion.Aplicacion
 
         public async Task<List<ActivoDTO>> ConsultarActivos()
         {
-            return await new ServicioActivo().ConsultarActivos();
+            var activos = new ServicioActivo().ConsultarActivos();
+            var clases = new ServicioDominio().ConsultarClases();
+            var marcas = new ServicioDominio().ConsultarMarcas();
+            var modelos = new ServicioDominio().ConsultarModelos();
+            var dependencias = new ServicioDominio().ConsultarDependencias();
+
+            await Task.WhenAll(activos, clases, marcas, modelos, dependencias);
+
+            return (from x in activos.Result
+                    join y in clases.Result on x.claseId equals y.claseId
+                    join z in marcas.Result on x.marcaId equals z.marcaId
+                    join a in modelos.Result on x.modeloId equals a.modeloId
+                    join b in dependencias.Result on x.dependenciaId equals b.dependenciaId
+                    select new ActivoDTO
+                    {
+                        itemId = x.itemId,
+                        claseId = x.claseId,
+                        claseIdStr = y.nombre,
+                        dependenciaId = x.dependenciaId,
+                        dependenciaIdStr = b.nombre,
+                        estado = x.estado,
+                        fechaBaja = x.fechaBaja,
+                        fechaCreacion = x.fechaCreacion,
+                        fechaFinalGarantia = x.fechaFinalGarantia,
+                        fechaIngreso = x.fechaIngreso,
+                        marcaId = x.marcaId,
+                        marcaIdStr = z.nombre,
+                        modeloId = x.modeloId,
+                        modeloIdStr = a.nombre,
+                        observacion = x.observacion,
+                        serial = x.serial,
+                        usuarioCreacion = x.usuarioCreacion,
+                        valor = x.valor
+                    }).ToList();
         }
 
         public async Task<ActivoDTO> ConsultarActivoPorId(int _id)
@@ -106,7 +135,20 @@ namespace Web.Validacion.Aplicacion
             if (_id == 0)
                 return new ActivoDTO();
 
-            return await new ServicioActivo().ConsultarActivo(_id);
+            ActivoDTO activos = await new ServicioActivo().ConsultarActivo(_id);
+            var clases = new ServicioDominio().ConsultarClase(activos.claseId);
+            var marcas = new ServicioDominio().ConsultarMarca(activos.marcaId);
+            var modelos = new ServicioDominio().ConsultarModelo(activos.modeloId);
+            var dependencias = new ServicioDominio().ConsultarDependencia(activos.dependenciaId);
+
+            await Task.WhenAll(clases, marcas, modelos, dependencias);
+
+            activos.claseIdStr = clases.Result.nombre;
+            activos.marcaIdStr = marcas.Result.nombre;
+            activos.modeloIdStr = modelos.Result.nombre;
+            activos.dependenciaIdStr = dependencias.Result.nombre;
+
+            return activos;
         }
 
     }

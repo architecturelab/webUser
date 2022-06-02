@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Web.Models.Aplicacion;
-using Web.Servicio;
-using WebApp.Models.General;
+using WebApp.Models.Aplicacion;
+using WebApp.Servicio;
 
-namespace Web.Validacion.Aplicacion
+namespace WebApp.Validacion.Aplicacion
 {
     public class DominioValidacion
     {

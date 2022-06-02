@@ -1,4 +1,4 @@
-﻿namespace Web.Controllers
+﻿namespace WebApp.Controllers
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

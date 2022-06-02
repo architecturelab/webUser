@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Web.Validacion.General
+namespace WebApp.Validacion.General
 {
     public class GestionUsuario
     {

@@ -1,4 +1,4 @@
-﻿@using Web.Validacion.General
+﻿@using WebApp.Validacion.General
 
 @{
     GestionClaims gestionClaims = new GestionClaims(User);
@@ -212,11 +212,12 @@
                                 @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista"))
                                 {
                                     <li><a href="@Url.Action("GestionActivos","Activo")">Crear</a></li>
+                                    <li><a href="@Url.Action("BandejaActivos","Activo")">Bandeja Activos</a></li>
                                 }
 
-                                @if (User.IsInRole("Administrador") || User.IsInRole("Diagnosticador") || User.IsInRole("Evaluaciones") || User.IsInRole("Reparaciones"))
+                                @if (User.IsInRole("Administrador") || User.IsInRole("Almacenista") || User.IsInRole("Diagnosticador") || User.IsInRole("Evaluaciones") || User.IsInRole("Reparaciones"))
                                 {
-                                    <li><a href="@Url.Action("BandejaActivos","Activo")">Bandeja</a></li>
+                                    <li><a href="@Url.Action("Bandeja","WorkFlow")">Bandeja Tickets</a></li>
                                 }
                             </ul>
                         </li>
@@ -275,7 +276,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2022 Proyecto ArchitectureLab - Pontificia Universidad Javeriana - Entorno de @Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                © 2022 Proyecto ArchitectureLab - Pontificia Universidad Javeriana - Entorno @Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

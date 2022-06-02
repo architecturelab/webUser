@@ -7,22 +7,22 @@ using WebApp.Models.Aplicacion;
 
 namespace WebApp.Servicio
 {
-    public class ServicioActivo
+    public class ServicioWorkFlow
     {
-        public async Task<bool> CrearActivo(ActivoDTO activoDTO)
+        public async Task<bool> CrearWorkFlow(WorkFlowDTO workFlowDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/ticket");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
-                var body = JsonConvert.SerializeObject(activoDTO);
+                var body = JsonConvert.SerializeObject(workFlowDTO);
                 request.AddParameter("application/json", body, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
 
-                ActivoDTO resultado = JsonConvert.DeserializeObject<ActivoDTO>(response.Content);
+                WorkFlowDTO resultado = JsonConvert.DeserializeObject<WorkFlowDTO>(response.Content);
 
-                if (resultado.itemId != 0)
+                if (resultado.ticketId != 0)
                     return true;
                 else return false;
             }
@@ -32,20 +32,20 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<bool> ActualizarActivo(ActivoDTO activoDTO)
+        public async Task<bool> ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/ticket");
                 var request = new RestRequest(Method.PUT);
                 request.AddHeader("Content-Type", "application/json");
-                var body = JsonConvert.SerializeObject(activoDTO);
+                var body = JsonConvert.SerializeObject(workFlowDTO);
                 request.AddParameter("application/json", body, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
 
-                ActivoDTO resultado = JsonConvert.DeserializeObject<ActivoDTO>(response.Content);
+                WorkFlowDTO resultado = JsonConvert.DeserializeObject<WorkFlowDTO>(response.Content);
 
-                if (resultado.itemId != 0)
+                if (resultado.ticketId != 0)
                     return true;
                 else return false;
             }
@@ -55,33 +55,33 @@ namespace WebApp.Servicio
             }
         }
 
-        public async Task<List<ActivoDTO>> ConsultarActivos()
+        public async Task<List<WorkFlowDTO>> ConsultarWorkFlows()
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/items-plain");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/tickets");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
-                return JsonConvert.DeserializeObject<List<ActivoDTO>>(response.Content);
+                return JsonConvert.DeserializeObject<List<WorkFlowDTO>>(response.Content);
             }
             catch (Exception ex)
             {
-                return new List<ActivoDTO>();
+                return new List<WorkFlowDTO>();
             }
         }
 
-        public async Task<ActivoDTO> ConsultarActivo(int _id)
+        public async Task<WorkFlowDTO> ConsultarWorkFlow(int _id)
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/item/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesWorkFlow")}workflow/ticket/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
-                return JsonConvert.DeserializeObject<ActivoDTO>(response.Content);
+                return JsonConvert.DeserializeObject<WorkFlowDTO>(response.Content);
             }
             catch (Exception ex)
             {
-                return new ActivoDTO();
+                return new WorkFlowDTO();
             }
         }
 

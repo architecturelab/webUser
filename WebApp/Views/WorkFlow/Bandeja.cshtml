@@ -1,0 +1,98 @@
+﻿@model IEnumerable<WebApp.Models.Aplicacion.WorkFlowDTO>
+@using WebApp.Validacion.General
+@using WebApp.Models.Aplicacion
+
+@{
+    GestionClaims gestionClaims = new GestionClaims(User);
+}
+
+<link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Plantilla/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Gestión Tickets</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Ticket</a></li>
+            <li class="breadcrumb-item active">Bandeja Tickets</li>
+        </ol>
+    </div>
+</div>
+
+<h1>Bienvenid@@ @gestionClaims.Nombres -@gestionClaims.Apellidos</h1>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h4 class="card-title">Datos Bandeja Tickets</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Opciones</th>
+                                <th>Estado</th>
+                                <th>TicketId</th>
+                                <th>Activo</th>
+                                <th>Diagnostico</th>
+                                <th>Fecha diagnostico</th>
+                                <th>Evaluación</th>
+                                <th>Fecha evaluación</th>
+                                <th>Reparación</th>
+                                <th>Fecha reparación</th>
+                                <th>Fecha cierre</th>
+                                <th>Usuario creación</th>
+                                <th>Fecha creación</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Opciones
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#" onclick="">Detalle Activo</a>
+                                                @if (User.IsInRole("Administrador") || User.IsInRole("Diagnosticador"))
+                                                {
+                                                    <a class="dropdown-item" href="#" onclick="">Concepto diagnostico</a>
+                                                }
+                                                
+                                                @if (User.IsInRole("Administrador") || User.IsInRole("Evaluaciones"))
+                                                {
+                                                    <a class="dropdown-item" href="#" onclick="">Concepto evaluación</a>
+                                                }
+                                                
+                                                @if (User.IsInRole("Administrador") || User.IsInRole("Reparaciones"))
+                                                {
+                                                    <a class="dropdown-item" href="#" onclick="">Concepto reparación</a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-success">@item.estado</span></td>
+                                    <td>@item.ticketId</td>
+                                    <td>@item.activoId</td>
+                                    <td>@item.diagnosticoId</td>
+                                    <td>@item.fechaDiagnostico</td>
+                                    <td>@item.evaluacionId</td>
+                                    <td>@item.fechaEvaluacion</td>
+                                    <td>@item.reparacionId</td>
+                                    <td>@item.fechaReparacion</td>
+                                    <td>@item.fechaCierre</td>
+                                    <td>@item.usuarioCreacion</td>
+                                    <td>@item.fechaCreacion</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

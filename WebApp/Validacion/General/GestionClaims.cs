@@ -1,6 +1,6 @@
-﻿namespace Web.Validacion.General
+﻿namespace WebApp.Validacion.General
 {
-    using Web.Models.General;
+    using WebApp.Models.General;
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;

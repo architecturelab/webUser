@@ -1,4 +1,4 @@
-﻿namespace Web.Validacion.General
+﻿namespace WebApp.Validacion.General
 {
     using System.Collections.Generic;
 

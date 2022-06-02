@@ -1,4 +1,4 @@
-﻿@model Web.Models.Aplicacion.ActivoDTO
+﻿@model WebApp.Models.Aplicacion.ActivoDTO
 
 <link href="~/Plantilla/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" />
 <link href="~/Plantilla/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
@@ -34,7 +34,7 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Clase:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.claseId </p>
+                                    <p class="form-control-static"> @Model.claseIdStr </p>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Marca:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.marcaId </p>
+                                    <p class="form-control-static"> @Model.marcaIdStr </p>
                                 </div>
                             </div>
                         </div>
@@ -106,13 +106,21 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Dependencia:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.dependenciaId </p>
+                                    <p class="form-control-static"> @Model.dependenciaIdStr </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Modelo:</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static"> @Model.modeloIdStr </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Observación:</label>
                                 <div class="col-md-9">
@@ -184,24 +192,37 @@
                             <thead>
                                 <tr>
                                     <th>Estado</th>
+                                    <th>TicketId</th>
+                                    <th>Activo</th>
                                     <th>Diagnostico</th>
-                                    <th>Fecha del diagnostico</th>
+                                    <th>Fecha diagnostico</th>
                                     <th>Evaluación</th>
-                                    <th>Fecha del evaluación</th>
+                                    <th>Fecha evaluación</th>
                                     <th>Reparación</th>
-                                    <th>Fecha del reparación</th>
+                                    <th>Fecha reparación</th>
+                                    <th>Fecha cierre</th>
+                                    <th>Usuario creación</th>
+                                    <th>Fecha creación</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Diagnostico</td>
-                                    <td>Se ve como dañado</td>
-                                    <td>30/04/2022</td>
-                                    <td>No tiene</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
+                                @foreach (var item in Model.WorkFlows)
+                                {
+                                    <tr>
+                                        <td><span class="badge badge-success">@item.estado</span></td>
+                                        <td>@item.ticketId</td>
+                                        <td>@item.activoId</td>
+                                        <td>@item.diagnosticoId</td>
+                                        <td>@item.fechaDiagnostico</td>
+                                        <td>@item.evaluacionId</td>
+                                        <td>@item.fechaEvaluacion</td>
+                                        <td>@item.reparacionId</td>
+                                        <td>@item.fechaReparacion</td>
+                                        <td>@item.fechaCierre</td>
+                                        <td>@item.usuarioCreacion</td>
+                                        <td>@item.fechaCreacion</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

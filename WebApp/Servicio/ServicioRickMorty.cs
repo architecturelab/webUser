@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using System;
-using Web.Models.Aplicacion;
+using WebApp.Models.Aplicacion;
 
-namespace Web.Servicio
+namespace WebApp.Servicio
 {
     public class ServicioRickMorty
     {

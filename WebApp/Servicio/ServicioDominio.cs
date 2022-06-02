@@ -1,4 +1,4 @@
-﻿using Web.Models.Aplicacion;
+﻿using WebApp.Models.Aplicacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using RestSharp;
 using Newtonsoft.Json;
 using WebApp.Models.General;
 
-namespace Web.Servicio
+namespace WebApp.Servicio
 {
     public class ServicioDominio
     {
@@ -292,10 +292,11 @@ namespace Web.Servicio
         {
             try
             {
-                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/brand/{_id}");
+                var client = new RestClient($"{Environment.GetEnvironmentVariable("ServicesInventory")}inventory/type/{_id}");
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
                 return JsonConvert.DeserializeObject<ClaseDTO>(response.Content);
+
             }
             catch (Exception ex)
             {

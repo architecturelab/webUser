@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Web.Models.Aplicacion
+namespace WebApp.Models.Aplicacion
 {
     public class RickMortyDTO
     {

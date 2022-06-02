@@ -1,11 +1,11 @@
-﻿namespace Web.Controllers
+﻿namespace WebApp.Controllers
 {
-    using Web.Models.General;
+    using WebApp.Models.General;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Web.Validacion.General;
+    using WebApp.Validacion.General;
     using System;
     using System.Collections.Generic;
     using System.Linq;

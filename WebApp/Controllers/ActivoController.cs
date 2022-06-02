@@ -1,20 +1,21 @@
-﻿namespace Web.Controllers
+﻿namespace WebApp.Controllers
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
-    using Web.Models.Aplicacion;
-    using Web.Validacion.Aplicacion;
-    using Web.Validacion.General;
+    using WebApp.Models.Aplicacion;
+    using WebApp.Validacion.Aplicacion;
+    using WebApp.Validacion.General;
 
     [Authorize]
     public class ActivoController : Controller
     {
 
         [HttpGet]
-        [Authorize(Roles = "Administrador,Diagnosticador,Evaluaciones,Reparaciones")]
+        [Authorize(Roles = "Administrador,Almacenista")]
         public async Task<IActionResult> BandejaActivos()
         {
             //ViewBag.RESULTADO_RICKMORTY = (new RickyMortyValidacion().Consultar()).results;
@@ -70,6 +71,7 @@
         {
 
             var resultado = await new ActivoValidacion().ConsultarActivoPorId(_id);
+            resultado.WorkFlows = (await new WorkFlowValidacion().ConsultarWorkFlows()).Where(x => x.activoId == _id).ToList(); 
 
             ViewBag.CLASE = new SelectList(await new DominioValidacion().ConsultarClases(), "claseId", "nombre", resultado.claseId);
             ViewBag.MARCA = new SelectList(await new DominioValidacion().ConsultarMarcas(), "marcaId", "nombre", resultado.marcaId);

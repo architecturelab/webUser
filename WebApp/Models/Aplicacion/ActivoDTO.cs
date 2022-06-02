@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Web.Models.Aplicacion
+namespace WebApp.Models.Aplicacion
 {
     public class ActivoDTO
     {
@@ -28,8 +28,14 @@ namespace Web.Models.Aplicacion
 
         public string fechaIngresoStr { get => this.fechaIngreso != null ? this.fechaIngreso.Value.ToShortDateString() : ""; }
         public string fechaFinalGarantiaStr { get => this.fechaFinalGarantia != null ? this.fechaFinalGarantia.Value.ToShortDateString() : ""; }
+        public string claseIdStr { get; set; }
+        public string marcaIdStr { get; set; }
+        public string modeloIdStr { get; set; }
+        public string dependenciaIdStr { get; set; }
 
         #endregion
+
+        public List<WorkFlowDTO> WorkFlows { get; set; }
 
     }
 }

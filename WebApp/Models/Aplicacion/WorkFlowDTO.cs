@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Web.Models.Aplicacion
+namespace WebApp.Models.Aplicacion
 {
     public class WorkFlowDTO
     {
-        public int TICKET_ID { get; set; }
-        public int ACTIVO_ID { get; set; }
-        public string ESTADO { get; set; }
-        public int? DIAGNOSTICO_ID { get; set; }
-        public int? EVALUACION_ID { get; set; }
-        public int? REPARACION_ID { get; set; }
-        public DateTime? FECHA_DIAGNOSTICO { get; set; }
-        public DateTime? FECHA_EVALUACION { get; set; }
-        public DateTime? FECHA_REPARACION { get; set; }
-        public DateTime? FECHA_CIERRE { get; set; }
-        public string USUARIO_CREACION { get; set; }
-        public DateTime FECHA_CREACION { get; set; }
-        public string USUARIO_MODIFICA { get; set; }
-        public DateTime? FECHA_MODIFICA { get; set; }
+        public int ticketId { get; set; }
+        public int activoId { get; set; }
+        public string estado { get; set; }
+        public int? diagnosticoId { get; set; }
+        public int? evaluacionId { get; set; }
+        public int? reparacionId { get; set; }
+        public DateTime? fechaDiagnostico { get; set; }
+        public DateTime? fechaEvaluacion { get; set; }
+        public DateTime? fechaReparacion { get; set; }
+        public DateTime? fechaCierre { get; set; }
+        public string usuarioCreacion { get; set; }
+        public DateTime fechaCreacion { get; set; }
+        public string usuarioModifica { get; set; }
+
+        public List<DiagnosticoDTO> Diagnosticos { get; set; }
+        public List<EvaluacionDTO> Evaluaciones { get; set; }
+        public List<ReparacionDTO> Reparaciones { get; set; }
+
     }
 }

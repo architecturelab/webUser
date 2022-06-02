@@ -1,4 +1,4 @@
-﻿namespace Web.Models.General
+﻿namespace WebApp.Models.General
 {
     public enum EstadoOperacion : short
     {

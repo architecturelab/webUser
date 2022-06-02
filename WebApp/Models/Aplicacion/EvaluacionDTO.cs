@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Web.Models.Aplicacion
+namespace WebApp.Models.Aplicacion
 {
     public class EvaluacionDTO
     {
