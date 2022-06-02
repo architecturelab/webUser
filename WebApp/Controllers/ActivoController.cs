@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.Extensions.Configuration;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,11 +14,20 @@
     [Authorize]
     public class ActivoController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public ActivoController(IConfiguration configuration)
+        {
+           _configuration = configuration;  
+        }
 
         [HttpGet]
         [Authorize(Roles = "Administrador,Almacenista")]
         public async Task<IActionResult> BandejaActivos()
         {
+            ViewBag.VALOR1 = _configuration.GetValue<string>("ServicesInventory");
+            ViewBag.VALOR2 = _configuration.GetValue<string>("User");
+            ViewBag.VALOR3 = _configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT");
             //ViewBag.RESULTADO_RICKMORTY = (new RickyMortyValidacion().Consultar()).results;
             return View(await new ActivoValidacion().ConsultarActivos());
         }
