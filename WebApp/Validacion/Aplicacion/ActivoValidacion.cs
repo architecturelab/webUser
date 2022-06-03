@@ -95,37 +95,7 @@ namespace WebApp.Validacion.Aplicacion
         public List<ActivoDTO> ConsultarActivos()
         {
             var activos = new ServicioActivo().ConsultarActivos();
-            var clases = new ServicioDominio().ConsultarClases();
-            var marcas = new ServicioDominio().ConsultarMarcas();
-            var modelos = new ServicioDominio().ConsultarModelos();
-            var dependencias = new ServicioDominio().ConsultarDependencias();
-
-            return (from x in activos
-                    join y in clases on x.claseId equals y.claseId
-                    join z in marcas on x.marcaId equals z.marcaId
-                    join a in modelos on x.modeloId equals a.modeloId
-                    join b in dependencias on x.dependenciaId equals b.dependenciaId
-                    select new ActivoDTO
-                    {
-                        itemId = x.itemId,
-                        claseId = x.claseId,
-                        claseIdStr = y.nombre,
-                        dependenciaId = x.dependenciaId,
-                        dependenciaIdStr = b.nombre,
-                        estado = x.estado,
-                        fechaBaja = x.fechaBaja,
-                        fechaCreacion = x.fechaCreacion,
-                        fechaFinalGarantia = x.fechaFinalGarantia,
-                        fechaIngreso = x.fechaIngreso,
-                        marcaId = x.marcaId,
-                        marcaIdStr = z.nombre,
-                        modeloId = x.modeloId,
-                        modeloIdStr = a.nombre,
-                        observacion = x.observacion,
-                        serial = x.serial,
-                        usuarioCreacion = x.usuarioCreacion,
-                        valor = x.valor
-                    }).ToList();
+            return activos;
         }
 
         public ActivoDTO ConsultarActivoPorId(int _id)
@@ -134,16 +104,6 @@ namespace WebApp.Validacion.Aplicacion
                 return new ActivoDTO();
 
             ActivoDTO activos = new ServicioActivo().ConsultarActivo(_id);
-            var clases = new ServicioDominio().ConsultarClase(activos.claseId);
-            var marcas = new ServicioDominio().ConsultarMarca(activos.marcaId);
-            var modelos = new ServicioDominio().ConsultarModelo(activos.modeloId);
-            var dependencias = new ServicioDominio().ConsultarDependencia(activos.dependenciaId);
-
-            activos.claseIdStr = clases.nombre;
-            activos.marcaIdStr = marcas.nombre;
-            activos.modeloIdStr = modelos.nombre;
-            activos.dependenciaIdStr = dependencias.nombre;
-
             return activos;
         }
 

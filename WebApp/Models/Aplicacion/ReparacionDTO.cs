@@ -8,9 +8,10 @@ namespace WebApp.Models.Aplicacion
 {
     public class ReparacionDTO
     {
-        public int reparacionId { get; set; }
+        public int id { get; set; }
+        //public int reparationId { get; set; }
         public int activoId { get; set; }
-        public string descripcion { get; set; }
+        public string description { get; set; }
         public string usuarioCreacion { get; set; }
         public DateTime fechaCreacion { get; set; }
         public string usuarioModifica { get; set; }

@@ -8,10 +8,10 @@ namespace WebApp.Models.Aplicacion
 {
     public class EvaluacionDTO
     {
-        public int evaluacionId { get; set; }
+        public int evaluationId { get; set; }
         public int activoId { get; set; }
         public string descripcion { get; set; }
-        public bool decisionEvaluacion { get; set; }
+        public bool? decision { get; set; }
         public string usuarioCreacion { get; set; }
         public DateTime fechaCreacion { get; set; }
         public string usuarioModifica { get; set; }

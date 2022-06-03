@@ -34,7 +34,7 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Clase:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.claseIdStr </p>
+                                    <p class="form-control-static"> @Model.clase </p>
                                 </div>
                             </div>
                         </div>
@@ -43,13 +43,12 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Marca:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.marcaIdStr </p>
+                                    <p class="form-control-static"> @Model.marca </p>
                                 </div>
                             </div>
                         </div>
                         <!--/span-->
                     </div>
-                    <!--/row-->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -70,7 +69,6 @@
                         </div>
                         <!--/span-->
                     </div>
-                    <!--/row-->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -91,8 +89,6 @@
                         </div>
                         <!--/span-->
                     </div>
-                    <!--/row-->
-                    <!--/row-->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -106,7 +102,7 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Dependencia:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.dependenciaIdStr </p>
+                                    <p class="form-control-static"> @Model.dependencia </p>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +112,7 @@
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Modelo:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @Model.modeloIdStr </p>
+                                    <p class="form-control-static"> @Model.modelo </p>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +125,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -185,7 +180,24 @@
                         @foreach (var item in Model.WorkFlows)
                         {
                             <tr>
-                                <td><span class="badge badge-success">@item.estado</span></td>
+                                <td>
+                                    @if (item.estado == "Diagnostico")
+                                    {
+                                        <span class="badge badge-danger">@item.estado</span>
+                                    }
+                                    else if (item.estado == "Reparación")
+                                    {
+                                        <span class="badge badge-warning">@item.estado</span>
+                                    }
+                                    else if (item.estado == "Evaluación")
+                                    {
+                                        <span class="badge badge-primary">@item.estado</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-success">@item.estado</span>
+                                    }
+                                </td>
                                 <td>@item.ticketId</td>
                                 <td>
                                     @if (@item.diagnosticoId != null)
@@ -534,15 +546,17 @@
 
         $.ajax({
             url: '@Url.Action("ConsultarDiagnosticoPorId", "Diagnostico")',
-            data: { _id : _id},
+            data: { _id: _id },
             type: 'POST',
             async: false,
             dataType: 'json',
             success: function(data) {
-                $("#aptoDiagnosticador").val(data.apto == true ? "SI": "NO");
-                $("#reparacionDiagnosticador").val(data.reparacion == true ? "SI": "NO");
-                $("#descripcionDiagnosticador").val(data.descripcion);
-                $("#fechaCreacionDiagnosticador").val(data.fechaCreacionStr);
+                if (data != null) {
+                    $("#aptoDiagnosticador").val(data.apto == true ? "SI" : "NO");
+                    $("#reparacionDiagnosticador").val(data.reparacion == true ? "SI" : "NO");
+                    $("#descripcionDiagnosticador").val(data.descripcion);
+                    $("#fechaCreacionDiagnosticador").val(data.fechaCreacionStr);
+                }
                 $("#myModal3ver").modal("show");
             },
             error: function(xhr, status) {
@@ -555,14 +569,16 @@
 
         $.ajax({
             url: '@Url.Action("ConsultarEvaluacionPorId", "Evaluacion")',
-            data: { _id : _id},
+            data: { _id: _id },
             type: 'POST',
             async: false,
             dataType: 'json',
             success: function(data) {
-                $("#reparacionEvaluaciones").val(data.apto == true ? "SI": "NO");
-                $("#descripcionEvaluaciones").val(data.descripcion);
-                $("#fechaEvaluaciones").val(data.fechaCreacionStr);
+                if (data != null) {
+                    $("#reparacionEvaluaciones").val(data.apto == true ? "SI" : "NO");
+                    $("#descripcionEvaluaciones").val(data.descripcion);
+                    $("#fechaEvaluaciones").val(data.fechaCreacionStr);
+                }
                 $("#myModal4ver").modal("show");
             },
             error: function(xhr, status) {
@@ -572,15 +588,17 @@
     }
 
     function AbrirModal5ver(_id) {
-           $.ajax({
+        $.ajax({
             url: '@Url.Action("ConsultarReparacionPorId", "Reparacion")',
-            data: { _id : _id},
+            data: { _id: _id },
             type: 'POST',
             async: false,
             dataType: 'json',
             success: function(data) {
-                $("#descripcionReparaciones").val(data.descripcion);
-                $("#fechaReparaciones").val(data.fechaCreacionStr);
+                if (data != null) {
+                    $("#descripcionReparaciones").val(data.description);
+                    $("#fechaReparaciones").val(data.fechaCreacionStr);
+                }
                 $("#myModal5ver").modal("show");
             },
             error: function(xhr, status) {

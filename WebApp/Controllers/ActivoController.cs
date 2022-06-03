@@ -97,5 +97,12 @@
 
             return View(resultado);
         }
+
+        [HttpPost]
+        public JsonResult ConsultarActivoPorId(int _id)
+        {
+            ActivoDTO resultado = new ActivoValidacion().ConsultarActivoPorId(_id);
+            return Json(resultado);
+        }
     }
 }

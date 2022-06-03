@@ -28,10 +28,10 @@ namespace WebApp.Models.Aplicacion
 
         public string fechaIngresoStr { get => this.fechaIngreso != null ? this.fechaIngreso.Value.ToShortDateString() : ""; }
         public string fechaFinalGarantiaStr { get => this.fechaFinalGarantia != null ? this.fechaFinalGarantia.Value.ToShortDateString() : ""; }
-        public string claseIdStr { get; set; }
-        public string marcaIdStr { get; set; }
-        public string modeloIdStr { get; set; }
-        public string dependenciaIdStr { get; set; }
+        public string clase { get; set; }
+        public string marca { get; set; }
+        public string modelo { get; set; }
+        public string dependencia { get; set; }
 
         #endregion
 
