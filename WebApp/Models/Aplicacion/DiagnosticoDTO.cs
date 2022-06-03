@@ -10,6 +10,7 @@ namespace WebApp.Models.Aplicacion
     {
         public int diagnosticId { get; set; } 
         public int activoId { get; set; } 
+        public int ticketId { get; set; } 
         public string descripcion { get; set; } 
         public bool? apto { get; set; } 
         public bool? reparacion { get; set; } 

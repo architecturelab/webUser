@@ -10,6 +10,7 @@ namespace WebApp.Models.Aplicacion
     {
         public int evaluationId { get; set; }
         public int activoId { get; set; }
+        public int ticketId { get; set; }
         public string descripcion { get; set; }
         public bool? decision { get; set; }
         public string usuarioCreacion { get; set; }

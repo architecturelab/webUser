@@ -11,6 +11,7 @@ namespace WebApp.Models.Aplicacion
         public int id { get; set; }
         //public int reparationId { get; set; }
         public int activoId { get; set; }
+        public int ticketId { get; set; }
         public string description { get; set; }
         public string usuarioCreacion { get; set; }
         public DateTime fechaCreacion { get; set; }

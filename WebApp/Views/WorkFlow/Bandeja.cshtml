@@ -59,17 +59,17 @@
                                             <div class="dropdown-menu">
                                                 @if (User.IsInRole("Administrador") || User.IsInRole("Diagnosticador"))
                                                 {
-                                                    <a class="dropdown-item" href="#" onclick="AbrirModal3()">Concepto diagnostico</a>
+                                                    <a class="dropdown-item" href="#" onclick="AbrirModal3(@item.ticketId, @item.activoId)">Concepto diagnostico</a>
                                                 }
 
                                                 @if (User.IsInRole("Administrador") || User.IsInRole("Evaluaciones"))
                                                 {
-                                                    <a class="dropdown-item" href="#" onclick="AbrirModal4()">Concepto evaluación</a>
+                                                    <a class="dropdown-item" href="#" onclick="AbrirModal4(@item.ticketId, @item.activoId)">Concepto evaluación</a>
                                                 }
 
                                                 @if (User.IsInRole("Administrador") || User.IsInRole("Reparaciones"))
                                                 {
-                                                    <a class="dropdown-item" href="#" onclick="AbrirModal5()">Concepto reparación</a>
+                                                    <a class="dropdown-item" href="#" onclick="AbrirModal5(@item.ticketId, @item.activoId)">Concepto reparación</a>
                                                 }
                                             </div>
                                         </div>
@@ -150,12 +150,14 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <input type="hidden" id="ticketIdDiag" name="ticketIdDiag" value="" />
+                    <input type="hidden" id="activoIdDiag" name="activoIdDiag" value="" />
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.Label("", "Apto", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "apto" })
+                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "aptoDiag" })
                                 </div>
                             </div>
                         </div>
@@ -165,7 +167,7 @@
                             @Html.Label("", "Reparación", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "reparacion" })
+                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "reparacionDiag" })
                                 </div>
                             </div>
                         </div>
@@ -177,7 +179,7 @@
                             @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcion" })
+                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcionDiag" })
                                 </div>
                             </div>
                         </div>
@@ -187,7 +189,7 @@
                             @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fechaCreacion" } })
+                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fechaCreacionDiag" } })
                                 </div>
                             </div>
                         </div>
@@ -218,12 +220,14 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <input type="hidden" id="ticketIdEval" name="ticketIdEval" value="" />
+                    <input type="hidden" id="activoIdEval" name="activoIdEval" value="" />
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.Label("", "Desición Reparación", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "reparacion" })
+                                    @Html.DropDownList("DESICION", null, String.Format("Seleccione una clase"), htmlAttributes: new { @class = "form-control select2", style = "width: 100%;", @id = "reparacionEval" })
                                 </div>
                             </div>
                         </div>
@@ -233,7 +237,7 @@
                             @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fecha" } })
+                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fechaEval" } })
                                 </div>
                             </div>
                         </div>
@@ -245,7 +249,7 @@
                             @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcion" })
+                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcionEval" })
                                 </div>
                             </div>
                         </div>
@@ -276,12 +280,14 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <input type="hidden" id="ticketIdRepar" name="ticketIdRepar" value="" />
+                    <input type="hidden" id="activoIdRepar" name="activoIdRepar" value="" />
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.Label("", "Descripción", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcion" })
+                                    @Html.TextArea("DESCRIPCION", new { @class = "form-control", @Required = true, cols = 10, rows = 4, @placeholder = "Descripción (Max 100 caracteres)", @maxlength = "100", id = "descripcionRepar" })
                                 </div>
                             </div>
                         </div>
@@ -291,7 +297,7 @@
                             @Html.Label("", "Fecha", htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fecha" } })
+                                    @Html.Editor("FECHA", new { htmlAttributes = new { @class = "form-control date", type = "date", @Required = true, @id = "fechaRepar" } })
                                 </div>
                             </div>
                         </div>
@@ -311,7 +317,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal de ver Diagnosticador-->
 <div class="modal fade" id="myModal3ver" role="dialog" aria-labelledby="myModalLabel">
@@ -566,16 +571,187 @@
 </div>
 
 <script>
-    function AbrirModal3() {
+    function AbrirModal3(_idTicket, _idActivo) {
+        $("#ticketIdDiag").val(_idTicket);
+        $("#activoIdDiag").val(_idActivo);
         $("#myModal3").modal("show");
     }
 
-    function AbrirModal4() {
+    function AbrirModal4(_idTicket, _idActivo) {
+        $("#ticketIdEval").val(_idTicket);
+        $("#activoIdEval").val(_idActivo);
         $("#myModal4").modal("show");
     }
 
-    function AbrirModal5() {
+    function AbrirModal5(_idTicket, _idActivo) {
+        $("#ticketIdRepar").val(_idTicket);
+        $("#activoIdRepar").val(_idActivo);
         $("#myModal5").modal("show");
+    }
+
+    function GuardarDiagnostico() {
+        var diagnosticoDTO =
+        {
+            ticketId: $("#ticketIdDiag").val(),
+            activoId: $("#activoIdDiag").val(),
+            descripcion: $("#descripcionDiag").val(),
+            apto: $("#aptoDiag").val(),
+            reparacion: $("#reparacionDiag").val(),
+            fechaCreacion: $("#fechaCreacionDiag").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("CrearDiagnostico", "Diagnostico")',
+            data: diagnosticoDTO,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data.ok) {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: data.mensaje,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: data.mensaje,
+                        icon: 'warning',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error: function(xhr, status) {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    }
+
+    function GuardarEvaluacion() {
+        var evaluacionDTO =
+        {
+            activoId: $("#activoIdEval").val(),
+            ticketId: $("#ticketIdEval").val(),
+            descripcion: $("#descripcionEval").val(),
+            fechaCreacion: $("#fechaEval").val(),
+            decision: $("#reparacionEval").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("CrearEvaluacion", "Evaluacion")',
+            data: evaluacionDTO,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data.ok) {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: data.mensaje,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: data.mensaje,
+                        icon: 'warning',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error: function(xhr, status) {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    }
+
+    function GuardarReparacion() {
+        var reparacionDTO =
+        {
+            activoId: $("#activoIdRepar").val(),
+            ticketId: $("#ticketIdRepar").val(),
+            description: $("#descripcionRepar").val(),
+            fechaCreacion: $("#fechaRepar").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("CrearReparacion", "Reparacion")',
+            data: reparacionDTO,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data.ok) {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: data.mensaje,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: data.mensaje,
+                        icon: 'warning',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error: function(xhr, status) {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
     }
 
     function AbrirModal3ver(_id) {
@@ -671,72 +847,4 @@
         });
     }
 
-
-                                    //function ModalActualizar() {
-                                    //    $("#fechaIngreso").val();
-                                    //    $("#fechaFinalGarantia").val();
-                                    //    $("#myModal2").modal("show");
-                                    //}
-
-                                    //function Actualizar() {
-                                    //    var activoDTO =
-                                    //    {
-                                    //        itemId: $("#itemId").val(),
-                                    //        claseId: $("#claseId").val(),
-                                    //        marcaId: $("#marcaId").val(),
-                                    //        modeloId: $("#modeloId").val(),
-                                    //        serial: $("#serial").val(),
-                                    //        fechaIngreso: $("#fechaIngreso").val(),
-                                    //        fechaFinalGarantia: $("#fechaFinalGarantia").val(),
-                                    //        valor: $("#valor").val(),
-                                    //        fechaBaja: $("#fechaBaja").val(),
-                                    //        estado: $("#estado").val(),
-                                    //        observacion: $("#observacion").val(),
-                                    //        dependenciaId: $("#dependenciaId").val()
-                                    //    };
-
-                                    //    $.ajax({
-                                    //        url: '@Url.Action("ActualizarActivo", "Activo")',
-                                    //        data: activoDTO,
-                                    //        type: 'POST',
-                                    //        dataType: 'json',
-                                    //        success: function(data) {
-                                    //            if (data.ok) {
-                                    //                Swal.fire({
-                                    //                    title: 'Exito',
-                                    //                    text: data.mensaje,
-                                    //                    icon: 'success',
-                                    //                    showCancelButton: false,
-                                    //                    confirmButtonColor: '#3085d6',
-                                    //                    cancelButtonColor: '#d33',
-                                    //                    confirmButtonText: 'Aceptar'
-                                    //                }).then((result) => {
-                                    //                    location.reload();
-                                    //                });
-                                    //            }
-                                    //            else {
-                                    //                Swal.fire({
-                                    //                    title: 'Atención',
-                                    //                    text: data.mensaje,
-                                    //                    icon: 'warning',
-                                    //                    showCancelButton: false,
-                                    //                    confirmButtonColor: '#3085d6',
-                                    //                    cancelButtonColor: '#d33',
-                                    //                    confirmButtonText: 'Aceptar'
-                                    //                });
-                                    //            }
-                                    //        },
-                                    //        error: function(xhr, status) {
-                                    //            Swal.fire({
-                                    //                title: 'Error',
-                                    //                text: data.mensaje,
-                                    //                icon: 'error',
-                                    //                showCancelButton: false,
-                                    //                confirmButtonColor: '#3085d6',
-                                    //                cancelButtonColor: '#d33',
-                                    //                confirmButtonText: 'Aceptar'
-                                    //            });
-                                    //        }
-                                    //    });
-                                    //}
 </script>
