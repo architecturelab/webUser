@@ -24,7 +24,6 @@
 #COPY --from=publish /app/publish .
 #ENTRYPOINT ["dotnet", "WebApp.dll"]
 
-
 #Configuración para GCP
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /app
