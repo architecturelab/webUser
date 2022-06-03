@@ -8,6 +8,7 @@ namespace WebApp
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using System;
+    using System.Threading.Tasks;
     using WebApp.Models.General;
 
     public class Startup
@@ -37,10 +38,11 @@ namespace WebApp
                 options.LoginPath = new PathString("/Cuenta/Login");
                 options.LogoutPath = new PathString("/Cuenta/logout");
                 options.AccessDeniedPath = new PathString("/Cuenta/Login");
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(50000);
-                options.Cookie.Expiration = TimeSpan.FromSeconds(50000);
-                options.SlidingExpiration = false;
+                options.ExpireTimeSpan = DateTime.Now.Subtract(DateTime.UtcNow).Add(TimeSpan.FromHours(24));
+                options.SlidingExpiration = true;
             });
+
+            services.AddControllers();
             #endregion
         }
 
@@ -69,7 +71,6 @@ namespace WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
