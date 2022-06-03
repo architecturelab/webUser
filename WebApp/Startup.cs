@@ -38,7 +38,8 @@ namespace WebApp
                 options.LogoutPath = new PathString("/Cuenta/logout");
                 options.AccessDeniedPath = new PathString("/Cuenta/Login");
                 options.ExpireTimeSpan = TimeSpan.FromSeconds(50000);
-                options.SlidingExpiration = true;
+                options.Cookie.Expiration = TimeSpan.FromSeconds(50000);
+                options.SlidingExpiration = false;
             });
             #endregion
         }
