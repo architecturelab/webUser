@@ -27,7 +27,7 @@
                 </div>
                 <br />
                 <h4 class="card-title">Resultado Esperado: >=70% </h4>
-                <h4 class="card-title">Resultado Final: 30% </h4>
+                <h4 class="card-title">Resultado Final: @ViewBag.Resultado1 % </h4>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                 </div>
                 <br />
                 <h4 class="card-title">Resultado Esperado: &lt;=30% </h4>
-                <h4 class="card-title">Resultado Final: 30% </h4>
+                <h4 class="card-title">Resultado Final: @ViewBag.Resultado2 % </h4>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 </div>
                 <br />
                 <h4 class="card-title">Resultado Esperado: >=70% </h4>
-                <h4 class="card-title">Resultado Final: 30% </h4>
+                <h4 class="card-title">Resultado Final: @ViewBag.Resultado3 % </h4>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
                 </div>
                 <br />
                 <h4 class="card-title">Resultado Esperado: &lt;=20% </h4>
-                <h4 class="card-title">Resultado Final: 30% </h4>
+                <h4 class="card-title">Resultado Final: @ViewBag.Resultado4 % </h4>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
                 </div>
                 <br />
                 <h4 class="card-title">Resultado Esperado: &lt;=10% </h4>
-                <h4 class="card-title">Resultado Final: 30% </h4>
+                <h4 class="card-title">Resultado Final: @ViewBag.Resultado5 % </h4>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
                 </div>
                 <br />
                 <h4 class="card-title">Resultado Esperado: &lt;30% </h4>
-                <h4 class="card-title">Resultado Final: 30% </h4>
+                <h4 class="card-title">Resultado Final: @ViewBag.Resultado6 % </h4>
             </div>
         </div>
     </div>
@@ -123,7 +123,7 @@
                     "labels": ["Total Elementos Disponibles", "Total Elementos"],
                     "datasets": [{
                         "label": "My First Dataset",
-                        "data": [300, 50],
+                        "data": [@ViewBag.TotalElementosDisponibles, @ViewBag.TotalElementos],
                         "backgroundColor": ["rgb(252, 75, 108)", "rgb(30, 136, 229)"]
                     }
                     ]
@@ -134,10 +134,10 @@
             {
                 "type": "doughnut",
                 "data": {
-                    "labels": ["Elementos Descartados", "Elementos Ingresados"],
+                    "labels": ["Elementos Descartados", "Elementos Ingresados a diagnostico"],
                     "datasets": [{
                         "label": "My First Dataset",
-                        "data": [300, 50],
+                        "data": [@ViewBag.TotalDescartados, @ViewBag.TotalElementosConTicket],
                         "backgroundColor": ["rgb(252, 75, 250)", "rgb(30, 150, 229)"]
                     }
                     ]
@@ -148,10 +148,10 @@
             {
                 "type": "pie",
                 "data": {
-                    "labels": ["Numero de Viabilidades en menos de 7 días", "Numero de Viabilidades"],
+                    "labels": ["Numero de Viabilidades en menos de 7 días", "Numero de Tickets"],
                     "datasets": [{
                         "label": "My First Dataset",
-                        "data": [300, 50],
+                        "data": [@ViewBag.NumerodeViabilidadesenmenosde7dias, @ViewBag.NumerodeTickets],
                         "backgroundColor": ["rgb(90, 75, 108)", "rgb(30, 50, 229)"]
                     }
                     ]
@@ -165,7 +165,7 @@
                     "labels": ["Total elementos con 20% vida útil o menos", "Total elementos"],
                     "datasets": [{
                         "label": "My First Dataset",
-                        "data": [300, 50],
+                        "data": [@ViewBag.TotalElementosCon20VidaUtiloMenos, @ViewBag.TotalElementosDisponibles],
                         "backgroundColor": ["rgb(150, 75, 108)", "rgb(30, 136, 95)"]
                     }
                     ]
@@ -176,10 +176,10 @@
             {
                 "type": "pie",
                 "data": {
-                    "labels": ["Numero elementos reparados devueltos", "Número de elementos reparados"],
+                    "labels": ["Numero elementos descartados", "Número de elementos reparados"],
                     "datasets": [{
                         "label": "My First Dataset",
-                        "data": [300, 50],
+                        "data": [@ViewBag.NumerodeElementosDescartados, @ViewBag.NumerodeElementosReparados],
                         "backgroundColor": ["rgb(200, 75, 108)", "rgb(30, 136, 50)"]
                     }
                     ]
@@ -193,7 +193,7 @@
                     "labels": ["Valor total de bienes obsoletos * 100", "Valor total de bienes disponibles"],
                     "datasets": [{
                         "label": "My First Dataset",
-                        "data": [300, 50],
+                        "data": [@ViewBag.totalElementosBienesObsoletos, @ViewBag.TotalElementosDisponibles],
                         "backgroundColor": ["rgb(60, 160, 108)", "rgb(30, 168, 229)"]
                     }
                     ]
