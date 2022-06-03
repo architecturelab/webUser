@@ -28,14 +28,14 @@ namespace WebApp.Validacion.Aplicacion
             if (activoDTO.fechaFinalGarantia == null)
                 return (false, "El campo fecha final garantia es obligatorio");
 
-            if (activoDTO.valor == 0)
-                return (false, "El campo valor es obligatorio");
+            //if (activoDTO.valor <= 0)
+            //    return (false, "El campo valor es obligatorio");
 
             //if (activoDTO.fechaBaja == null)
             //    return (false, "El campo fecha baja es obligatorio");
 
-            if (string.IsNullOrEmpty(activoDTO.estado))
-                return (false, "El campo estado es obligatorio");
+            //if (string.IsNullOrEmpty(activoDTO.estado))
+            //    return (false, "El campo estado es obligatorio");
 
             //if (string.IsNullOrEmpty(activoDTO.observacion))
             //    return (false, "El campo observación es obligatorio");
@@ -71,8 +71,8 @@ namespace WebApp.Validacion.Aplicacion
             if (activoDTO.fechaFinalGarantia == null)
                 return (false, "El campo fecha final garantia es obligatorio");
 
-            if (activoDTO.valor == 0)
-                return (false, "El campo valor es obligatorio");
+            //if (activoDTO.valor == 0)
+            //    return (false, "El campo valor es obligatorio");
 
             //if (activoDTO.fechaBaja == null)
             //    return (false, "El campo fecha baja es obligatorio");

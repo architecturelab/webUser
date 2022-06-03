@@ -51,7 +51,16 @@
                             {
                                 <tr>
                                     <td><a type="button" class="btn btn-success" href="@Url.Action("DetalleGestionActivo","Activo", new { _id = item.itemId })"><i class="fas fa-eye"></i> Ver</a></td>
-                                    <td><span class="badge badge-success">@item.estado</span></td>
+                                    <td>
+                                        @if (item.estado == "" || item.estado == null)
+                                        {
+                                            <span class="badge badge-success">Disponible</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-success">@item.estado</span>
+                                        }
+                                    </td>
                                     <td>@item.clase</td>
                                     <td>@item.marca</td>
                                     <td>@item.modelo</td>
