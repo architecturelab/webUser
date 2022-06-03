@@ -8,7 +8,7 @@ namespace WebApp.Servicio
 {
     public class ServicioActivo
     {
-        private string urlServicio = Environment.GetEnvironmentVariable("ServicesInventory") != null ? Environment.GetEnvironmentVariable("ServicesInventory") : "http://34.135.4.147/"; //104.197.60.202
+        private string urlServicio = Environment.GetEnvironmentVariable("ServicesInventory") != null ? Environment.GetEnvironmentVariable("ServicesInventory") : "http://104.197.60.202/";
 
         public bool CrearActivo(ActivoDTO activoDTO)
         {
