@@ -57,19 +57,31 @@
                                                 Opciones
                                             </button>
                                             <div class="dropdown-menu">
-                                                @if (User.IsInRole("Administrador") || User.IsInRole("Diagnosticador"))
+                                                @if ((User.IsInRole("Administrador") || User.IsInRole("Diagnosticador")) && item.estado == "Diagnostico" && item.diagnosticoId == null)
                                                 {
                                                     <a class="dropdown-item" href="#" onclick="AbrirModal3(@item.ticketId, @item.activoId)">Concepto diagnostico</a>
                                                 }
+                                                else
+                                                {
+                                                     <a class="dropdown-item" href="#">No se puede diagnosticar</a>
+                                                }
 
-                                                @if (User.IsInRole("Administrador") || User.IsInRole("Evaluaciones"))
+                                                @if ((User.IsInRole("Administrador") || User.IsInRole("Evaluaciones")) && item.estado == "Evaluación" && item.evaluacionId == null)
                                                 {
                                                     <a class="dropdown-item" href="#" onclick="AbrirModal4(@item.ticketId, @item.activoId)">Concepto evaluación</a>
                                                 }
+                                                else
+                                                {
+                                                     <a class="dropdown-item" href="#">No se puede evaluar</a>
+                                                }
 
-                                                @if (User.IsInRole("Administrador") || User.IsInRole("Reparaciones"))
+                                                @if ((User.IsInRole("Administrador") || User.IsInRole("Reparaciones")) && item.estado == "Reparación" && item.reparacionId == null)
                                                 {
                                                     <a class="dropdown-item" href="#" onclick="AbrirModal5(@item.ticketId, @item.activoId)">Concepto reparación</a>
+                                                }
+                                                else
+                                                {
+                                                     <a class="dropdown-item" href="#">No se puede reparar</a>
                                                 }
                                             </div>
                                         </div>
@@ -569,6 +581,9 @@
         </div>
     </div>
 </div>
+
+<script src="~/Plantilla/assets/plugins/jquery/jquery.min.js"></script>
+<script src="~/Plantilla/assets/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script>
     function AbrirModal3(_idTicket, _idActivo) {

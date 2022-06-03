@@ -25,14 +25,14 @@ namespace WebApp.Validacion.Aplicacion
             if (workFlowDTO.activoId == 0)
                 return (false, "El campo activoId es obligatorio");
 
-            if (workFlowDTO.estado == "Diagnostico")
-                workFlowDTO.estado = "Evaluación";
-            else if (workFlowDTO.estado == "Evaluación")
-                workFlowDTO.estado = "Reparación";
-            else if (workFlowDTO.estado == "Reparación")
-                workFlowDTO.estado = "Cerrado";
+            WorkFlowDTO resultado = new ServicioWorkFlow().ActualizarWorkFlow(workFlowDTO);
 
-            if (new ServicioWorkFlow().ActualizarWorkFlow(workFlowDTO))
+            ActivoDTO activoDTO = new ActivoValidacion().ConsultarActivoPorId(resultado.activoId);
+            activoDTO.estado = resultado.estado;
+            activoDTO.usuarioModifica = resultado.usuarioCreacion;
+            new ActivoValidacion().ValidacionActivoActualizarAsync(activoDTO);
+
+            if (resultado.ticketId != 0)
                 return (true, "El registro se actualizó correctamente");
             else
                 return (false, "No se pudo actualizar el registro");

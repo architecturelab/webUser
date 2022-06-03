@@ -14,9 +14,18 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(reparacionDTO.description))
                 return (true, "El campo descripcion es obligatorio", null);
 
-            var resultado = new ServicioReparacion().CrearReparacion(reparacionDTO);
+            ReparacionDTO resultado = new ServicioReparacion().CrearReparacion(reparacionDTO);
 
-            if (resultado != null)
+            WorkFlowDTO workFlowDTO = new WorkFlowValidacion().ConsultarWorkFlowPorId(reparacionDTO.ticketId);
+            workFlowDTO.estado = "Disponible";
+            workFlowDTO.reparacionId = resultado.id;
+            workFlowDTO.fechaReparacion = resultado.fechaCreacion;
+            workFlowDTO.fechaCierre = resultado.fechaCreacion;
+            workFlowDTO.usuarioModifica = resultado.usuarioCreacion;
+
+            new WorkFlowValidacion().ValidacionWorkFlowActualizarAsync(workFlowDTO);
+
+            if (resultado != null && workFlowDTO != null)
                 return (true, "El registro se actualizó correctamente", resultado);
             else
                 return (false, "No se pudo actualizar el registro", null);

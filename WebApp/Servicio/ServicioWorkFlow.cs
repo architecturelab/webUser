@@ -34,7 +34,7 @@ namespace WebApp.Servicio
             }
         }
 
-        public bool ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
+        public WorkFlowDTO ActualizarWorkFlow(WorkFlowDTO workFlowDTO)
         {
             try
             {
@@ -47,13 +47,13 @@ namespace WebApp.Servicio
 
                 WorkFlowDTO resultado = JsonConvert.DeserializeObject<WorkFlowDTO>(response.Content);
 
-                if (resultado.ticketId != 0)
-                    return true;
-                else return false;
+                if (resultado != null)
+                    return resultado;
+                else return new WorkFlowDTO();
             }
             catch (Exception ex)
             {
-                return false;
+                return new WorkFlowDTO();
             }
         }
 

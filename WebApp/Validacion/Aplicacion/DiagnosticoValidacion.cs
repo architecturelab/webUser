@@ -20,9 +20,22 @@ namespace WebApp.Validacion.Aplicacion
             if (string.IsNullOrEmpty(diagnosticoDTO.descripcion))
                 return (true, "El campo descripcion es obligatorio", null);
 
-            var resultado = new ServicioDiagnostico().CrearDiagnostico(diagnosticoDTO);
+            DiagnosticoDTO resultado = new ServicioDiagnostico().CrearDiagnostico(diagnosticoDTO);
 
-            if (resultado != null)
+            WorkFlowDTO workFlowDTO = new WorkFlowValidacion().ConsultarWorkFlowPorId(diagnosticoDTO.ticketId);
+
+            if (diagnosticoDTO.apto.Value == false)
+                workFlowDTO.estado = "Descartado";
+            else
+                workFlowDTO.estado = "Evaluación";
+
+            workFlowDTO.diagnosticoId = resultado.diagnosticId;
+            workFlowDTO.fechaDiagnostico = resultado.fechaCreacion;
+            workFlowDTO.usuarioModifica = resultado.usuarioCreacion;
+
+            new WorkFlowValidacion().ValidacionWorkFlowActualizarAsync(workFlowDTO);
+
+            if (resultado != null && workFlowDTO != null)
                 return (true, "El registro se actualizó correctamente", resultado);
             else
                 return (false, "No se pudo actualizar el registro", null);

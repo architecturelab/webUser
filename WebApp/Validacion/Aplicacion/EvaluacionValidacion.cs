@@ -12,14 +12,27 @@ namespace WebApp.Validacion.Aplicacion
                 return (true, "El campo activoId es obligatorio", null);
 
             if (evaluacionDTO.decision == null)
-                return (true, "El campo decision es obligatorio", null);  
+                return (true, "El campo decision es obligatorio", null);
 
             if (string.IsNullOrEmpty(evaluacionDTO.descripcion))
                 return (true, "El campo descripcion es obligatorio", null);
 
-            var resultado = new ServicioEvaluacion().CrearEvaluacion(evaluacionDTO);
+            EvaluacionDTO resultado = new ServicioEvaluacion().CrearEvaluacion(evaluacionDTO);
 
-            if (resultado != null)
+            WorkFlowDTO workFlowDTO = new WorkFlowValidacion().ConsultarWorkFlowPorId(evaluacionDTO.ticketId);
+
+            if (evaluacionDTO.decision.Value == true)
+                workFlowDTO.estado = "Reparación";
+            else
+                workFlowDTO.estado = "Descartado";
+
+            workFlowDTO.evaluacionId = resultado.evaluationId;
+            workFlowDTO.fechaEvaluacion = resultado.fechaCreacion;
+            workFlowDTO.usuarioModifica = resultado.usuarioCreacion;
+
+            new WorkFlowValidacion().ValidacionWorkFlowActualizarAsync(workFlowDTO);
+
+            if (resultado != null && workFlowDTO != null)
                 return (true, "El registro se actualizó correctamente", resultado);
             else
                 return (false, "No se pudo actualizar el registro", null);
